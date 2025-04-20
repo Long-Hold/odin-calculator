@@ -11,8 +11,14 @@
     border: 1px solid red;
 }
 
+:root {
+    --odinBlue: rgb(18, 24, 39);
+}
+
 body {
     display: flex;
     flex-flow: column wrap;
     align-items: center;
+    background-color: var(--odinBlue);
+    color: white;
 }
