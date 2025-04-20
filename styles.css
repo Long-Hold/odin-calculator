@@ -13,6 +13,7 @@
 
 :root {
     --odinBlue: rgb(18, 24, 39);
+    --customDarkGray: rgb(40, 40, 40);
 }
 
 body {
@@ -52,4 +53,19 @@ header {
     padding: 1rem;
     font-size: 24px;
     background-color: rgb(40, 40, 40);
+}
+
+#calculator-buttons button {
+    width: auto;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+#calculator-buttons button:hover {
+    background-color: lightgray;
+}
+
+#calculator-buttons button:active {
+    background-color: var(--customDarkGray);
+    color: white;
 }
