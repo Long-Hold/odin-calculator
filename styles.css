@@ -26,6 +26,13 @@ body {
     width: 100%;
 }
 
+header {
+    border-bottom: 1px solid gold;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+}
+
 #calculator-container {
     display: flex;
     flex-flow: column wrap;
