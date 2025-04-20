@@ -10,3 +10,9 @@
 * {
     border: 1px solid red;
 }
+
+body {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
