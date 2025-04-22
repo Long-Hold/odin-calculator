@@ -91,3 +91,11 @@ header {
     max-width: 80%;
     min-height: 80%;
 }
+
+#operand-buttons {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    min-height: 100%;
+    justify-content: space-evenly;
+}
