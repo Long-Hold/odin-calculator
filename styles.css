@@ -65,10 +65,10 @@ header {
 
 #calculator-buttons button {
     /* width: 15%; */
-    height: 15%;
+    /* height: 15%; */
     text-align: center;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: 100px;
 }
 
 #calculator-buttons button:hover {
