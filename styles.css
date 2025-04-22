@@ -39,26 +39,31 @@ header {
 #calculator-container {
     display: flex;
     flex-flow: column wrap;
-    min-width: 30%;
+    width: 300px;
+    /* min-width: 30%; */
     align-items: center;
     border: 1px solid black;
     background-color: gray;
     border-radius: 10px;
-    height: 80%;
+    height: 466px;
 }
 
 #display-window {
-    width: 100%;
+    width: 90%;
+    height: 20%;
     text-align: end;
     padding: 1rem;
+    margin: 10px;
     font-size: 24px;
     background-color: rgb(40, 40, 40);
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 5px black;
 }
 
 /* Button styling */
 
 #calculator-buttons button {
-    width: auto;
+    /* width: 15%; */
     height: 15%;
     text-align: center;
     padding: 1rem;
@@ -72,30 +77,4 @@ header {
 #calculator-buttons button:active {
     background-color: var(--customDarkGray);
     color: white;
-}
-
-/* Button container positioning */
-
-#calculator-buttons {
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
-    justify-content: space-evenly;
-    flex: 1;
-}
-
-#numerical-buttons {
-    display: flex;
-    flex-flow: row wrap;
-    flex: 0 1 0;
-    max-width: 80%;
-    min-height: 80%;
-}
-
-#operand-buttons {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    min-height: 100%;
-    justify-content: space-evenly;
 }
