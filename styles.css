@@ -8,12 +8,13 @@
 
 /* Debugging */
 * {
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 :root {
     --odinBlue: rgb(18, 24, 39);
     --customDarkGray: rgb(40, 40, 40);
+    --customLighterGray: rgb(69, 68, 68);
 }
 
 body {
@@ -56,7 +57,7 @@ header {
     padding: 1rem;
     margin: 10px;
     font-size: 24px;
-    background-color: rgb(69, 68, 68);
+    background-color: var(--customLighterGray);
     border-radius: 10px;
     box-shadow: inset 2px 2px 5px black;
     color: teal;
@@ -70,6 +71,14 @@ header {
     text-align: center;
     padding: 1rem;
     border-radius: 100px;
+    box-shadow: 2px 2px 10px black;
+    border: none;
+    font-size: larger;
+}
+
+#numerical-buttons button {
+    color: white;
+    background-color: var(--customLighterGray);
 }
 
 #calculator-buttons button:hover {
@@ -80,6 +89,8 @@ header {
     background-color: var(--customDarkGray);
     color: white;
 }
+
+/* Button container positioning and styling */
 
 #calculator-buttons {
     display: flex;
