@@ -74,11 +74,21 @@ header {
     box-shadow: 2px 2px 10px black;
     border: none;
     font-size: larger;
+    color: white;
 }
 
-#numerical-buttons button {
-    color: white;
+.digit-button {
     background-color: var(--customLighterGray);
+}
+
+.operand {
+    background-color: rgb(209, 177, 22);
+}
+
+#operand-buttons #clear-memory, 
+#operand-buttons #clear-digit {
+    background-color: rgb(189, 53, 53);
+    width: 5rem;
 }
 
 #calculator-buttons button:hover {
