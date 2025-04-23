@@ -8,7 +8,7 @@
 
 /* Debugging */
 * {
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 :root {
@@ -40,7 +40,7 @@ header {
 
 #calculator-container {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     width: 300px;
     align-items: center;
     /* border: 1px solid black; */
@@ -102,15 +102,21 @@ header {
 
 #calculator-buttons {
     display: flex;
-    flex: 0 1 0;
-    margin: 10px;
+    flex-flow: column nowrap;
+    width: 100%;
+    padding: 10px;
 }
 
 #reset-buttons {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-evenly;
-    align-items: flex-start;
+}
+
+.button-group {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
 }
 
 #numerical-buttons {
@@ -118,8 +124,9 @@ header {
     flex-flow: row wrap;
     justify-content: space-evenly;
     align-items: center;
-    gap: 5px;
-    padding: 15%;
+    gap: 0.8rem;
+    padding: 10%;
+    width: 85%;
 }
 
 #operand-buttons {
@@ -127,4 +134,5 @@ header {
     flex-flow: column wrap;
     justify-content: space-evenly;
     gap: 5px;
+    width: 15%;
 }
