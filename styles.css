@@ -6,11 +6,6 @@
     box-sizing: border-box;
 }
 
-/* Debugging */
-* {
-    /* border: 1px solid red; */
-}
-
 :root {
     --odinBlue: rgb(18, 24, 39);
     --customDarkGray: rgb(40, 40, 40);
