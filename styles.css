@@ -83,8 +83,8 @@ header {
     background-color: rgb(209, 177, 22);
 }
 
-#operand-buttons #clear-memory, 
-#operand-buttons #clear-digit {
+#reset-buttons #clear-memory, 
+#reset-buttons #clear-digit {
     background-color: rgb(189, 53, 53);
     width: 5rem;
 }
@@ -102,8 +102,15 @@ header {
 
 #calculator-buttons {
     display: flex;
-    flex: 1 0 0;
+    flex: 0 1 0;
     margin: 10px;
+}
+
+#reset-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
 }
 
 #numerical-buttons {
