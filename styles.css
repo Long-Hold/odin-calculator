@@ -80,3 +80,9 @@ header {
     background-color: var(--customDarkGray);
     color: white;
 }
+
+#calculator-buttons {
+    display: flex;
+    flex: 1 0 0;
+    margin: 10px;
+}
