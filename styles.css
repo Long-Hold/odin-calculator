@@ -87,17 +87,32 @@ header {
     background-color: rgb(209, 177, 22);
 }
 
-#reset-buttons #clear-memory, 
-#reset-buttons #clear-digit {
+#operand-buttons .operand:hover {
+    background-color: rgb(204, 201, 65);
+}
+
+#operand-buttons .operand:active {
+    background-color: rgb(167, 167, 167);
+}
+
+#reset-buttons .reset {
     background-color: rgb(189, 53, 53);
     width: 5.5rem;
 }
 
-#calculator-buttons button:hover {
-    background-color: lightgray;
+#reset-buttons .reset:hover {
+    background-color: rgb(178, 29, 29);
 }
 
-#calculator-buttons button:active {
+#reset-buttons .reset:active {
+    background-color: var(--customDarkGray);
+}
+
+#calculator-buttons .digit-button:hover {
+    background-color: rgb(95, 93, 93);
+}
+
+#calculator-buttons .digit-button:active {
     background-color: var(--customDarkGray);
     color: white;
 }
