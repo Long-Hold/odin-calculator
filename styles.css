@@ -79,6 +79,10 @@ header {
     background-color: var(--customLighterGray);
 }
 
+#operand-buttons button {
+    padding: 0.8rem;
+}
+
 .operand {
     background-color: rgb(209, 177, 22);
 }
@@ -86,7 +90,7 @@ header {
 #reset-buttons #clear-memory, 
 #reset-buttons #clear-digit {
     background-color: rgb(189, 53, 53);
-    width: 5rem;
+    width: 5.5rem;
 }
 
 #calculator-buttons button:hover {
@@ -110,7 +114,10 @@ header {
 #reset-buttons {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    gap: 0.8rem;
+    padding-left: 10%;
+    width: 85%;
 }
 
 .button-group {
@@ -133,6 +140,6 @@ header {
     display: flex;
     flex-flow: column wrap;
     justify-content: space-evenly;
-    gap: 5px;
+    gap: 0.8rem;
     width: 15%;
 }
