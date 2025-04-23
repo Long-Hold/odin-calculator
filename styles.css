@@ -8,7 +8,7 @@
 
 /* Debugging */
 * {
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 :root {
@@ -66,8 +66,6 @@ header {
 /* Button styling */
 
 #calculator-buttons button {
-    /* width: 15%; */
-    /* height: 15%; */
     text-align: center;
     padding: 1rem;
     border-radius: 100px;
