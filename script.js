@@ -5,13 +5,8 @@ class Calculator {
         this.secondDigit = secondDigit;
     }
 
-    // Getter for private method #computeResult
-    get calculate() {
-        return this.#computeResult();
-    }
-
     // Private method that returns a calculated solution
-    #computeResult() {
+    calculate() {
         switch(this.operand) {
             case '+': return this.firstDigit + this.secondDigit;
             case '-': return this.firstDigit - this.secondDigit;
