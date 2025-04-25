@@ -9,12 +9,26 @@ class Calculator {
         this.secondDigit = secondDigit;
     }
 
+    set firstDigit(value) {
+        if (typeof(value) !== 'number' || isNaN(value))
+            throw new Error('Invalid first digit passed.');
+        this.#firstDigit = value;
+    }
+
     set operand(symbol) {
         const validOperands = ['+', '-', '*', '/'];
 
         if (validOperands.includes(symbol))
             this.#operand = symbol;
         else throw new Error('Invalid operand passed.');
+    }
+
+    set secondDigit(value) {
+
+    }
+
+    #isDividingByZero() {
+        
     }
 }
 
