@@ -1,3 +1,23 @@
+class Calculator {
+    #firstDigit;
+    #operand;
+    #secondDigit;
+
+    constructor(firstDigit, operand, secondDigit) {
+        this.firstDigit = firstDigit;
+        this.operand = operand;
+        this.secondDigit = secondDigit;
+    }
+
+    set operand(symbol) {
+        const validOperands = ['+', '-', '*', '/'];
+
+        if (validOperands.includes(symbol))
+            this.#operand = symbol;
+        else throw new Error('Invalid operand passed.');
+    }
+}
+
 function calculate(operand, digit1, digit2) {
     switch (operand) {
         case '+':
