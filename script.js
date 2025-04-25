@@ -50,25 +50,18 @@ class Calculator {
         const display = document.getElementById('display-window');
         display.textContent = message;
     }
-}
 
-function calculate(operand, digit1, digit2) {
-    switch (operand) {
-        case '+':
-            return digit1 + digit2;
-        case '-':
-            return digit1 - digit2;
-        case '*':
-            return digit1 * digit2;
-        case '/':
-            return digit1 / digit2;
-    };
-}
+    calculate() {
+        switch (this.operand) {
+            case '+':
+                return this.firstDigit + this.secondDigit;
+            case '-':
+                return this.firstDigit - this.secondDigit;
+            case '*':
+                return this.firstDigit * this.secondDigit;
+            case '/':
+                return this.firstDigit / this.secondDigit;
+        }
+    }
 
-function updateDisplay() {
-    /* Updates the calculator display
-    to reflect the users button selections. */
-
-    // Calculator display window
-    const displayWindow = document.getElementById('display-window');
 }
