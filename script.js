@@ -9,10 +9,18 @@ class Calculator {
         this.secondDigit = secondDigit;
     }
 
+    get firstDigit() {
+        return this.#firstDigit;
+    }
+
     set firstDigit(value) {
         if (typeof(value) !== 'number' || isNaN(value))
             throw new Error('Invalid first digit passed.');
         this.#firstDigit = value;
+    }
+
+    get operand() {
+        return this.#operand;
     }
 
     set operand(symbol) {
@@ -21,6 +29,10 @@ class Calculator {
         if (validOperands.includes(symbol))
             this.#operand = symbol;
         else throw new Error('Invalid operand passed.');
+    }
+
+    get secondDigit() {
+        return this.#secondDigit;
     }
 
     set secondDigit(value) {
