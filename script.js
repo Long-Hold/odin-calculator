@@ -24,11 +24,19 @@ class Calculator {
     }
 
     set secondDigit(value) {
-
+        if (value === 0 && this.#isDividingByZero)
+            this.updateCalculatorDisplay('OOPS: CANNOT DIVIDE BY 0');
+        else
+            this.#secondDigit = value;
     }
 
     #isDividingByZero() {
-        
+        return this.#operand === '/';
+    }
+
+    updateCalculatorDisplay(message = 0) {
+        const display = document.getElementById('display-window');
+        display.textContent = message;
     }
 }
 
