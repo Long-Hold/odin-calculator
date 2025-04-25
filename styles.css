@@ -47,7 +47,7 @@ header {
 
 #display-window {
     width: 90%;
-    height: 20%;
+    max-height: 20%;
     text-align: end;
     padding: 1rem;
     margin: 10px;

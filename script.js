@@ -24,14 +24,14 @@ class Calculator {
     }
 
     set secondDigit(value) {
-        if (value === 0 && this.#isDividingByZero)
-            this.updateCalculatorDisplay('OOPS: CANNOT DIVIDE BY 0');
+        if (this.#isDividingByZero(value))
+            this.updateCalculatorDisplay('UNDEFINED');
         else
             this.#secondDigit = value;
     }
 
-    #isDividingByZero() {
-        return this.#operand === '/';
+    #isDividingByZero(secondDigit) {
+        return this.#operand === '/' && secondDigit === 0;
     }
 
     updateCalculatorDisplay(message = 0) {
