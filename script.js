@@ -37,7 +37,7 @@ class Calculator {
 
     set secondDigit(value) {
         if (this.#isDividingByZero(value))
-            this.updateCalculatorDisplay('UNDEFINED');
+            this.#displayErrors('UNDEFINED');
         else
             this.#secondDigit = value;
     }
@@ -46,7 +46,7 @@ class Calculator {
         return this.#operand === '/' && secondDigit === 0;
     }
 
-    updateCalculatorDisplay(message = 0) {
+    #displayErrors(message = 'NaN') {
         const display = document.getElementById('display-window');
         display.textContent = message;
     }
@@ -65,3 +65,19 @@ class Calculator {
     }
 
 }
+
+function createCalculator() {
+    const calcContainer = document.getElementById('calculator-container');
+    
+    calcContainer.addEventListener('click', event => {
+        if (event.target.classList.contains('digit-button'))
+            updateCalculatorDisplay(event.target.textContent);
+    });
+}
+
+function updateCalculatorDisplay(message = 0) {
+    const display = document.getElementById('display-window');
+    display.textContent += message;
+}
+
+createCalculator();
