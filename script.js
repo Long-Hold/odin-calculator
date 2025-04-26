@@ -68,7 +68,7 @@ class Calculator {
 
 function createCalculator() {
     const calcContainer = document.getElementById('calculator-container');
-    
+
     calcContainer.addEventListener('click', event => {
         if (event.target.classList.contains('digit-button'))
             updateCalculatorDisplay(event.target.textContent);
@@ -77,6 +77,10 @@ function createCalculator() {
 
 function updateCalculatorDisplay(message = 0) {
     const display = document.getElementById('display-window');
+
+    // Clear the default view of the display
+    if (display.textContent === '0')
+        display.textContent = '';
     display.textContent += message;
 }
 
