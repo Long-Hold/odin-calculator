@@ -64,6 +64,21 @@ class Calculator {
         }
     }
 
+    clear_screen() {
+        /*
+            Resets the display to show only the placeholder again
+         */
+
+        const display = document.getElementById('display-window');
+        const placeholderActive = document.getElementById('placeholder');
+
+        if (!placeholderActive) {
+            const placeholder = document.createElement('span');
+            placeholder.textContent = '0';
+            display.appendChild(placeholder);
+        }
+    }
+
 }
 
 function createCalculator() {
