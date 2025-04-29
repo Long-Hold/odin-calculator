@@ -102,6 +102,12 @@ class Calculator {
     }
 
     #deleteLastInput(event) {
+        /*
+            Removes the last submitted char from the display node.
+            If there is only one char left or the placeholder is still active,
+            call this.#resetMemory instead.
+        */
+       
         if (!this.#placeHolderIsActive() && this.calculatorDisplay.textContent.length > 1) {
             const display = document.getElementById('display-window');
             display.textContent = display.textContent.slice(0, -1);
