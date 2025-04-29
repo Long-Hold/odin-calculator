@@ -102,10 +102,13 @@ class Calculator {
     }
 
     #deleteLastInput(event) {
-        if (!this.#placeHolderIsActive()) {
+        if (!this.#placeHolderIsActive() && this.calculatorDisplay.textContent.length > 1) {
             const display = document.getElementById('display-window');
             display.textContent = display.textContent.slice(0, -1);
         }
+
+        else
+            this.#resetMemory(event);
     }
 
     calculate() {
