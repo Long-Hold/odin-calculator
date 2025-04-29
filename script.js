@@ -3,7 +3,7 @@ class Calculator {
     #operand;
     #secondDigit;
 
-    constructor(firstDigit, operand, secondDigit) {
+    constructor(firstDigit = null, operand = null, secondDigit = null) {
         this.firstDigit = firstDigit;
         this.operand = operand;
         this.secondDigit = secondDigit;
@@ -14,9 +14,14 @@ class Calculator {
     }
 
     set firstDigit(value) {
-        if (typeof(value) !== 'number' || isNaN(value))
+        if (value === null)
+            this.#firstDigit = null;
+
+        else if (typeof(value) !== 'number' || isNaN(value))
             throw new Error('Invalid first digit passed.');
-        this.#firstDigit = value;
+
+        else
+            this.#firstDigit = value;
     }
 
     get operand() {
@@ -24,11 +29,17 @@ class Calculator {
     }
 
     set operand(symbol) {
-        const validOperands = ['+', '-', '*', '/'];
+        if (symbol === null)
+            this.#operand = null;
 
-        if (validOperands.includes(symbol))
-            this.#operand = symbol;
-        else throw new Error('Invalid operand passed.');
+        // If the operand is not null, then check if it is a valid operand
+        else {
+            const validOperands = ['+', '-', '*', '/'];
+
+            if (validOperands.includes(symbol))
+                this.#operand = symbol;
+            else throw new Error('Invalid operand passed.');
+        }
     }
 
     get secondDigit() {
@@ -36,8 +47,12 @@ class Calculator {
     }
 
     set secondDigit(value) {
-        if (this.#isDividingByZero(value))
+        if (value === null)
+            this.#secondDigit = null;
+
+        else if (this.#isDividingByZero(value))
             this.#displayErrors('UNDEFINED');
+
         else
             this.#secondDigit = value;
     }
