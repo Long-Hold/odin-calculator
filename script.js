@@ -5,6 +5,9 @@
 
         - After the 'AC' button is clicked and the <span> element is added, it has no id.
         Add an 'id' to the 'span' element created by the #resetMemory method
+
+        - #resetMemory method should re-initialize class parameters to 'null' to represent
+        an initialized, but unused value.
 */
 
 class Calculator {
