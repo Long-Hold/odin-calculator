@@ -88,8 +88,9 @@ function updateCalculatorDisplay(message = 0) {
         display.removeChild(placeholder);
     }
 
-    // If the placeholder isn't active, continue appending user selection
-    display.textContent += message;
+    else
+        // If the placeholder isn't active, continue appending user selection
+        display.textContent += message;
 }
 
 createCalculator();
