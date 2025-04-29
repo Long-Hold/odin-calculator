@@ -69,6 +69,10 @@ class Calculator {
             this.#secondDigit = value;
     }
 
+    #placeHolderIsActive() {
+        return document.getElementById('placeholder') ? true : false;
+    }
+
     #isDividingByZero(secondDigit) {
         return this.#operand === '/' && secondDigit === 0;
     }
