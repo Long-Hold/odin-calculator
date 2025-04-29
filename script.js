@@ -69,10 +69,13 @@ class Calculator {
             Resets the display to show only the placeholder again
          */
 
+        //#TODO: Add event listener for clicking the clear button
+
         const display = document.getElementById('display-window');
         const placeholderActive = document.getElementById('placeholder');
 
         if (!placeholderActive) {
+            display.textContent = '';
             const placeholder = document.createElement('span');
             placeholder.textContent = '0';
             display.appendChild(placeholder);
@@ -100,7 +103,7 @@ function updateCalculatorDisplay(message = 0) {
     // then we need to remove the placeholder and update it with the user selection
     if (display.contains(placeholder)) {
         display.textContent = message;
-        display.removeChild(placeholder);
+        placeholder.remove();
     }
 
     else
