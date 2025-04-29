@@ -51,6 +51,18 @@ class Calculator {
         display.textContent = message;
     }
 
+    #resetMemory(event) {
+        const display = document.getElementById('display-window');
+        const placeholderActive = document.getElementById('placeholder');
+
+        if (!placeholderActive) {
+            display.textContent = '';
+            const placeholder = document.createElement('span');
+            placeholder.textContent = '0';
+            display.appendChild(placeholder);
+        }
+    }
+
     calculate() {
         switch (this.operand) {
             case '+':
@@ -70,16 +82,8 @@ class Calculator {
          */
 
         //#TODO: Add event listener for clicking the clear button
-
-        const display = document.getElementById('display-window');
-        const placeholderActive = document.getElementById('placeholder');
-
-        if (!placeholderActive) {
-            display.textContent = '';
-            const placeholder = document.createElement('span');
-            placeholder.textContent = '0';
-            display.appendChild(placeholder);
-        }
+        const clearScreenButton = document.getElementById('clear-memory');
+        clearScreenButton.addEventListener('click', this.#resetMemory);
     }
 
 }
