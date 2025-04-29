@@ -19,6 +19,7 @@ class Calculator {
         this.firstDigit = firstDigit;
         this.operand = operand;
         this.secondDigit = secondDigit;
+        this.calculatorDisplay = document.getElementById('display-window');
     }
 
     get firstDigit() {
@@ -70,7 +71,7 @@ class Calculator {
     }
 
     #placeHolderIsActive() {
-        return document.getElementById('placeholder') ? true : false;
+        return this.calculatorDisplay.querySelector('#placeholder') !== null;
     }
 
     #isDividingByZero(secondDigit) {
@@ -94,14 +95,17 @@ class Calculator {
         if (!placeholderActive) {
             display.textContent = '';
             const placeholder = document.createElement('span');
+            placeholder.setAttribute('id', 'placeholder');
             placeholder.textContent = '0';
             display.appendChild(placeholder);
         }
     }
 
     #deleteLastInput(event) {
-        const display = document.getElementById('display-window');
-        display.textContent = display.textContent.slice(0, -1);
+        if (!this.#placeHolderIsActive()) {
+            const display = document.getElementById('display-window');
+            display.textContent = display.textContent.slice(0, -1);
+        }
     }
 
     calculate() {
@@ -133,7 +137,7 @@ class Calculator {
         */
 
         const clearDigitButton = document.getElementById('clear-digit');
-        clearDigitButton.addEventListener('click', this.#deleteLastInput);
+        clearDigitButton.addEventListener('click', (event) => this.#deleteLastInput(event));
     }
 
 }
