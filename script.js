@@ -5,6 +5,16 @@
 
         - #resetMemory method should re-initialize class parameters to 'null' to represent
         an initialized, but unused value.
+
+        - calculate() has no way of being triggered, it should be tied to the '=' button.
+        Add an eventListener to trigger this method when clicked.
+
+        - Add a method that updates the calculators firstDigit, operand, and secondDigit params,
+        Pseudocode:
+            - When an operand is selected, store textContent to the left of operand in firstDigit,
+            then store the operand in operand.
+            - When '=' is selected, store the value to right of operand in secondDigit, then
+            evaluate equation.
 */
 
 class Calculator {
