@@ -83,6 +83,11 @@ class Calculator {
         }
     }
 
+    #deleteLastInput(event) {
+        const display = document.getElementById('display-window');
+        display.textContent = display.textContent.slice(0, -1);
+    }
+
     calculate() {
         switch (this.operand) {
             case '+':
@@ -96,13 +101,23 @@ class Calculator {
         }
     }
 
-    clear_screen() {
+    clearScreen() {
         /*
             Listens for a click on the AC button,
             on click, calls the #resetMemory() private method.
          */
         const clearScreenButton = document.getElementById('clear-memory');
         clearScreenButton.addEventListener('click', this.#resetMemory);
+    }
+
+    clearLastInput() {
+        /*
+            Listens for input on the C button,
+            calls event handler to erase most recent input 
+        */
+
+        const clearDigitButton = document.getElementById('clear-digit');
+        clearDigitButton.addEventListener('click', this.#deleteLastInput);
     }
 
 }
@@ -135,3 +150,6 @@ function updateCalculatorDisplay(message = 0) {
 }
 
 createCalculator();
+const calc = new Calculator();
+calc.clearLastInput();
+calc.clearScreen();
