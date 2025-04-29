@@ -77,6 +77,8 @@ function createCalculator() {
 
 function updateCalculatorDisplay(message = 0) {
     const display = document.getElementById('display-window');
+
+    // placeholder is an htmml element that is displayed before program is interacted with
     const placeholder = document.getElementById('placeholder');
 
     // If the calculator screen is showing the default placeholder text,
