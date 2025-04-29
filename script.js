@@ -77,10 +77,16 @@ function createCalculator() {
 
 function updateCalculatorDisplay(message = 0) {
     const display = document.getElementById('display-window');
+    const placeholder = document.getElementById('placeholder');
 
-    // Clear the default view of the display
-    if (display.textContent === '0')
-        display.textContent = '';
+    // If the calculator screen is showing the default placeholder text,
+    // then we need to remove the placeholder and update it with the user selection
+    if (display.contains(placeholder)) {
+        display.textContent = message;
+        display.removeChild(placeholder);
+    }
+
+    // If the placeholder isn't active, continue appending user selection
     display.textContent += message;
 }
 
