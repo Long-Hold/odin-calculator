@@ -52,6 +52,11 @@ class Calculator {
     }
 
     #resetMemory(event) {
+        /*
+             Invoked when the AC button event listener is triggered.
+             Checks if the placeHolder text element exists, if not, clears screen
+             and adds it back.
+        */
         const display = document.getElementById('display-window');
         const placeholderActive = document.getElementById('placeholder');
 
@@ -78,10 +83,9 @@ class Calculator {
 
     clear_screen() {
         /*
-            Resets the display to show only the placeholder again
+            Listens for a click on the AC button,
+            on click, calls the #resetMemory() private method.
          */
-
-        //#TODO: Add event listener for clicking the clear button
         const clearScreenButton = document.getElementById('clear-memory');
         clearScreenButton.addEventListener('click', this.#resetMemory);
     }
