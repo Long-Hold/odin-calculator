@@ -1,3 +1,12 @@
+/*
+    TODO:
+        - If an equation is calculated, the 'C' (clear-digit) button should function
+        as the 'AC' (clear memory) button
+
+        - After the 'AC' button is clicked and the <span> element is added, it has no id.
+        Add an 'id' to the 'span' element created by the #resetMemory method
+*/
+
 class Calculator {
     #firstDigit;
     #operand;
