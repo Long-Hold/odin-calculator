@@ -23,11 +23,11 @@ class Calculator {
     #secondDigit;
 
     constructor(firstDigit = null, operand = null, secondDigit = null) {
+        this.calculatorDisplay = document.getElementById('display-window');
+        this.calcButtons = document.getElementById('calculator-buttons');
         this.firstDigit = firstDigit;
         this.operand = operand;
         this.secondDigit = secondDigit;
-        this.calculatorDisplay = document.getElementById('display-window');
-        this.calcButtons = document.getElementById('calculator-buttons');
     }
 
     get firstDigit() {
@@ -87,8 +87,7 @@ class Calculator {
     }
 
     #displayErrors(message = 'NaN') {
-        const display = document.getElementById('display-window');
-        display.textContent = message;
+        this.calculatorDisplay.textContent = message;
     }
 
     #resetMemory(event) {
@@ -168,33 +167,6 @@ class Calculator {
             this.#delegateKeyChoice(event);
         })
     }
-}
-
-function createCalculator() {
-    const calcContainer = document.getElementById('calculator-container');
-
-    calcContainer.addEventListener('click', event => {
-        if (event.target.classList.contains('digit-button'))
-            updateCalculatorDisplay(event.target.textContent);
-    });
-}
-
-function updateCalculatorDisplay(message = 0) {
-    const display = document.getElementById('display-window');
-
-    // placeholder is an htmml element that is displayed before program is interacted with
-    const placeholder = document.getElementById('placeholder');
-
-    // If the calculator screen is showing the default placeholder text,
-    // then we need to remove the placeholder and update it with the user selection
-    if (display.contains(placeholder)) {
-        display.textContent = message;
-        placeholder.remove();
-    }
-
-    else
-        // If the placeholder isn't active, continue appending user selection
-        display.textContent += message;
 }
 
 const calc = new Calculator();
