@@ -3,12 +3,21 @@ class Calculator {
     #operand;
     #rightValue;
 
-    constructor(leftValue = null, operand = null, rightValue = null) {
+    constructor() {
         this.validOperands = ['+', '-', '*', '/'];
+        this.#setToBaseState();
+        this.#initializeDomElements();
+    }
 
-        this.leftValue = leftValue;
-        this.operand = operand;
-        this.rightValue = rightValue;
+    #setToBaseState() {
+        this.#leftValue = null;
+        this.#operand = null;
+        this.#rightValue = null;
+        this.result = null;
+    }
+    #initializeDomElements() {
+        this.display = document.getElementById('dsiplay-window');
+        this.buttons = document.getElementById('calculator-buttons');
     }
 
     #logSetterErrors(badValue, classVar) {
