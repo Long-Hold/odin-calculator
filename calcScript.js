@@ -96,7 +96,9 @@ class Calculator {
                 return this.leftValue * this.rightValue;
             
             case Calculator.OPERATIONS.DIVIDE:
-                return this.leftValue / this.rightValue;
+                return this.rightValue !== 0 
+                ? this.leftValue / this.rightValue
+                : this.#setToBaseState();
             
             default:
                 console.error('Invalid OPERATION submitted.')
