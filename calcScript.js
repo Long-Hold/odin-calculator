@@ -68,10 +68,22 @@ class CalculatorGUI {
 
     constructor() {
         this.#setDOMNodeRefs();
+        this.#setEventListeners();
     }
 
     #setDOMNodeRefs() {
         this.#display = document.getElementById('display-window');
         this.#buttonContainer = document.getElementById('calculator-buttons');
+    }
+
+    #setEventListeners() {
+        this.#buttonContainer.addEventListener('click', this.#delegateEvent.bind(this));
+    }
+
+    #delegateEvent(event) {
+        if (!event.target.matches('button')) {
+            return;
+        }
+        // TODO: Handle different classes of events (numeric, operand, clear buttons)
     }
 }
