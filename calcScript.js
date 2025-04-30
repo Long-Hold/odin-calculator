@@ -29,11 +29,10 @@ class Calculator {
         if (typeof(value) !== 'number' || isNaN(value)) {
             this.#logSetterErrors(value, '#leftValue');
             // call reset function
+            return;
         }
 
-        else {
-            this.#leftValue = value;
-        }
+        this.#leftValue = value;
     }
 
     get operand() {
@@ -43,9 +42,15 @@ class Calculator {
     set operand(symbol) {
         if (symbol === null) {
             this.#operand = null;
+            return;
         }
-        else if (!this.validOperands.includes(symbol)) {
 
+        if (!this.validOperands.includes(symbol)) {
+            this.#logSetterErrors(symbol, '#operand');
+            // call reset
+            return;
         }
+
+        this.#operand = symbol;
     }
 }
