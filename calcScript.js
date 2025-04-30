@@ -114,9 +114,10 @@ class CalculatorGUI {
     #display;
     #buttonContainer;
     #placeHolder;
-    calcEngine = new Calculator();
+    #calcEngine;
 
     constructor() {
+        this.#calcEngine = new Calculator();
         this.#setDOMNodeRefs();
         this.#setEventListeners();
         this.#cachePlaceHolder();
@@ -166,7 +167,7 @@ class CalculatorGUI {
     #clearMemory() {
         this.#display.textContent = '';
         this.#display.appendChild(this.#placeHolder);
-        this.calcEngine.resetMemory();
+        this.#calcEngine.resetMemory();
     }
 
     #clearDigit() {
