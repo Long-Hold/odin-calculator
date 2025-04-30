@@ -255,7 +255,6 @@ class Calculator {
             this.operand = this.#returnConvertedOperand(event);
         }
 
-        // TODO: When '=' is hit, record the values to right of operand in secondDigit
         if (event.target.id === 'equal') {
             this.secondDigit = this.#extractSecondDigitValues();
         }
