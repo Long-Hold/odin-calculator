@@ -27,6 +27,7 @@ class Calculator {
         this.operand = operand;
         this.secondDigit = secondDigit;
         this.calculatorDisplay = document.getElementById('display-window');
+        this.calcButtons = document.getElementById('calculator-buttons');
     }
 
     get firstDigit() {
@@ -123,6 +124,32 @@ class Calculator {
             this.#resetMemory(event);
     }
 
+    #delegateKeyChoice(event) {
+        // For all operands and digit buttons, we can update the display
+        // For the clear buttons, we must call a different function
+        if (event.target.classList.contains('digit-button') || 
+            event.target.classList.contains('operand')) {
+                this.#updateCalculatorDisplay(event.target.textContent);
+            }
+        
+        else if (event.target.id === 'clear-memory')
+            this.#resetMemory(event);
+        else if (event.target.id === 'clear-digit')
+            this.#deleteLastInput(event);
+    }
+
+    #updateCalculatorDisplay(message = 0) {
+        // If the calculator screen is showing the default placeholder text,
+        // then we simply need to replace the text content of the display
+        if (this.#placeHolderIsActive()) {
+            this.calculatorDisplay.textContent = message;
+        }
+    
+        else
+            // If the placeholder isn't active, continue appending user selection
+            this.calculatorDisplay.textContent += message;
+    }
+
     calculate() {
         switch (this.operand) {
             case '+':
@@ -136,25 +163,11 @@ class Calculator {
         }
     }
 
-    clearScreen() {
-        /*
-            Listens for a click on the AC button,
-            on click, calls the #resetMemory() private method.
-         */
-        const clearScreenButton = document.getElementById('clear-memory');
-        clearScreenButton.addEventListener('click', this.#resetMemory);
+    captureKeyPadClick() {
+        this.calcButtons.addEventListener('click', (event) => {
+            this.#delegateKeyChoice(event);
+        })
     }
-
-    clearLastInput() {
-        /*
-            Listens for input on the C button,
-            calls event handler to erase most recent input 
-        */
-
-        const clearDigitButton = document.getElementById('clear-digit');
-        clearDigitButton.addEventListener('click', (event) => this.#deleteLastInput(event));
-    }
-
 }
 
 function createCalculator() {
@@ -184,7 +197,5 @@ function updateCalculatorDisplay(message = 0) {
         display.textContent += message;
 }
 
-createCalculator();
 const calc = new Calculator();
-calc.clearLastInput();
-calc.clearScreen();
+calc.captureKeyPadClick();
