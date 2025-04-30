@@ -60,14 +60,14 @@ class Calculator {
         return this.#operand;
     }
 
-    set operand(symbol) {
-        if (!this.validOperands.includes(symbol)) {
-            this.#logSetterErrors(symbol, '#operand');
-            this.#setToBaseState();
-            return;
+    set operand(operandNodeID) {
+        try {
+            this.#operand = Calculator.assignOperationSYMBOL(operandNodeID);
         }
-
-        this.#operand = symbol;
+        catch(err) {
+            this.#logSetterErrors(operandNodeID, '#operand');
+            this.#setToBaseState();
+        }
     }
 
     get rightValue() {
