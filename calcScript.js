@@ -83,6 +83,27 @@ class Calculator {
 
         this.#rightValue = value;
     }
+
+    calculate() {
+        switch(this.operand) {
+            case Calculator.OPERATIONS.ADD:
+                return this.leftValue + this.rightValue;
+
+            case Calculator.OPERATIONS.SUBTRACT:
+                return this.leftValue - this.rightValue;
+            
+            case Calculator.OPERATIONS.MULTIPLY:
+                return this.leftValue * this.rightValue;
+            
+            case Calculator.OPERATIONS.DIVIDE:
+                return this.leftValue / this.rightValue;
+            
+            default:
+                console.error('Invalid OPERATION submitted.')
+                this.#setToBaseState();
+                return;
+        }
+    }
 }
 
 class CalculatorGUI {
