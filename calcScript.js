@@ -1,7 +1,25 @@
 class Calculator {
+    // An object containing operand symbols
+    static OPERATIONS = {
+        ADD: Symbol('add'),
+        SUBTRACT: Symbol('subtract'),
+        MULTIPLY: Symbol('multiply'),
+        DIVIDE: Symbol('divide')
+    };
+
+    static assignOperationSYMBOL(operandNodeID) {
+        switch(operandNodeID) {
+            case 'add':         return Calculator.OPERATIONS.ADD;
+            case 'subtract':    return Calculator.OPERATIONS.SUBTRACT;
+            case 'multiply':    return Calculator.OPERATIONS.MULTIPLY;
+            case 'divide':      return Calculator.OPERATIONS.DIVIDE;
+        }
+    }
+
     #leftValue;
     #operand;
     #rightValue;
+    #result;
 
     constructor() {
         this.validOperands = ['+', '-', '*', '/'];
@@ -12,7 +30,7 @@ class Calculator {
         this.#leftValue = null;
         this.#operand = null;
         this.#rightValue = null;
-        this.result = null;
+        this.#result = null;
     }
 
     #logSetterErrors(badValue, classVar) {
