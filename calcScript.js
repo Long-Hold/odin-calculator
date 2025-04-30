@@ -53,4 +53,23 @@ class Calculator {
 
         this.#operand = symbol;
     }
+
+    get rightValue() {
+        return this.#rightValue;
+    }
+
+    set rightValue(value) {
+        if (value === null) {
+            this.#rightValue = null;
+            return;
+        }
+
+        if (typeof(value) !== 'number' || isNaN(value)) {
+            this.#logSetterErrors(value, '#rightValue');
+            //call reset
+            return;
+        }
+
+        this.#rightValue = value;
+    }
 }
