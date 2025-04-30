@@ -104,15 +104,22 @@ class Calculator {
                 return;
         }
     }
+
+    resetMemory() {
+        this.#setToBaseState();
+    }
 }
 
 class CalculatorGUI {
     #display;
     #buttonContainer;
+    #placeHolder;
+    calcEngine = new Calculator();
 
     constructor() {
         this.#setDOMNodeRefs();
         this.#setEventListeners();
+        this.#cachePlaceHolder();
     }
 
     #setDOMNodeRefs() {
@@ -124,10 +131,47 @@ class CalculatorGUI {
         this.#buttonContainer.addEventListener('click', this.#delegateEvent.bind(this));
     }
 
+    #cachePlaceHolder() {
+        this.#placeHolder = document.getElementById('placeholder').cloneNode(true);
+    }
+
     #delegateEvent(event) {
         if (!event.target.matches('button')) {
             return;
         }
+
+        // Record the class that event came from (its container)
+        const buttonType = event.target.parentNode.id;
+
         // TODO: Handle different classes of events (numeric, operand, clear buttons)
+        switch (buttonType) {
+            case 'reset-buttons':
+                this.#handleResetButtons(event);
+                return;
+
+            case 'numerical-buttons':
+                // handle numerical input
+                return;
+
+            case 'operand-buttons':
+                // handle operand selection
+                return;
+        }
+    }
+
+    #handleResetButtons(event) {
+        event.target.id === 'clear-memory'? this.#clearMemory() : this.#clearDigit();
+    }
+
+    #clearMemory() {
+        this.#display.textContent = '';
+        this.#display.appendChild(this.#placeHolder);
+        this.calcEngine.resetMemory();
+    }
+
+    #clearDigit() {
+
     }
 }
+
+const gui = new CalculatorGUI();
