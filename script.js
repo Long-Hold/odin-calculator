@@ -6,15 +6,23 @@
         - #resetMemory method should re-initialize class parameters to 'null' to represent
         an initialized, but unused value.
 
-        - calculate() has no way of being triggered, it should be tied to the '=' button.
-        Add an eventListener to trigger this method when clicked.
+        - If an operand is selected after inputting an equation already,
+        store the calculation of the previous equation, and then set it to the firstDigit var:
 
-        - Add a method that updates the calculators firstDigit, operand, and secondDigit params,
         Pseudocode:
-            - When an operand is selected, store textContent to the left of operand in firstDigit,
-            then store the operand in operand.
-            - When '=' is selected, store the value to right of operand in secondDigit, then
-            evaluate equation.
+            5 + 6 - 7
+            With the current class implementation, when '+' is selected,
+            firstDigit = 5, operand = '+'.
+
+            Plan: When a second operand that is not '=' is selected, call calculate():
+                when '+' is pressed after 6:
+                    If operand is not Null:
+                        secondDigit = 6 
+                    firstDigit = self.calculate(), so firstDigit = 11.
+                    operand = '-'
+                Display is now: 11 - 7.
+
+                Repeat process until '=' is selected, or another operand is placed.
 */
 
 class Calculator {
@@ -39,7 +47,7 @@ class Calculator {
             this.#firstDigit = null;
 
         else if (typeof(value) !== 'number' || isNaN(value))
-            throw new Error('Invalid first digit passed.');
+            throw new Error(`Invalid first digit passed: ${value}`);
 
         else
             this.#firstDigit = value;
@@ -128,7 +136,18 @@ class Calculator {
         // For the clear buttons, we must call a different function
         if (event.target.classList.contains('digit-button') || 
             event.target.classList.contains('operand')) {
+
                 this.#updateCalculatorDisplay(event.target.textContent);
+
+                // When an operand is selected, variables are intialized with inputted data
+                if (event.target.classList.contains('operand')) {
+                    this.initializeClassVars(event);
+                }
+
+                // When the equal button is selected, update the display with the calculation
+                if (event.target.id === 'equal') {
+                    this.#updateCalculatorDisplay(this.calculate());
+                }
             }
         
         else if (event.target.id === 'clear-memory')
@@ -167,6 +186,34 @@ class Calculator {
         return operatorMap[domOperand];
     }
 
+    #returnOperandId() {
+        const operatorIdDomMap = {
+            '+': 'add',
+            '-': 'subtract',
+            '*': 'multiply',
+            '/': 'divide'
+        };
+
+        return operatorIdDomMap[this.operand];
+    }
+
+    #extractFirstDigitValues() {
+        /**
+         * This method assigns the values to left of operand to firstDigit,
+         * values to right of operand to secondDigit
+         * 
+         *
+         */
+        const currentEquation = this.calculatorDisplay.textContent;
+        return parseInt(currentEquation);
+    }
+
+    #extractSecondDigitValues() {
+        const currentEquation = this.calculatorDisplay.textContent;
+        const operandIndex = currentEquation.indexOf(this.#returnOperandId());
+        return parseInt(currentEquation.slice(operandIndex + 1, -1));
+    }
+
     calculate() {
         switch (this.operand) {
             case '+':
@@ -184,6 +231,21 @@ class Calculator {
         this.calcButtons.addEventListener('click', (event) => {
             this.#delegateKeyChoice(event);
         })
+    }
+
+    initializeClassVars(event) {
+        // When an operand is selected, record the ints to the left as firstDigit,
+        // and then the operand itself
+        if (event.target.classList.contains('operand') &&
+            event.target.id !== 'equal') {
+            this.firstDigit = this.#extractFirstDigitValues() 
+            this.operand = this.#returnConvertedOperand(event);
+        }
+
+        // TODO: When '=' is hit, record the values to right of operand in secondDigit
+        if (event.target.id === 'equal') {
+            this.secondDigit = this.#extractSecondDigitValues();
+        }
     }
 }
 
