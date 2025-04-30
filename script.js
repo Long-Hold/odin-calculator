@@ -149,6 +149,24 @@ class Calculator {
             this.calculatorDisplay.textContent += message;
     }
 
+    #returnConvertedOperand(event) {
+        /**
+         * Compares the event target ID to an operand map,
+         * returns the corresponding value (operand).
+         * 
+         * Returns: A Javascript operand
+         */
+        const domOperand = event.target.id;
+        const operatorMap = {
+            'add': '+',
+            'subtract': '-',
+            'multiply': '*',
+            'divide': '/'
+        };
+
+        return operatorMap[domOperand];
+    }
+
     calculate() {
         switch (this.operand) {
             case '+':
