@@ -171,7 +171,12 @@ class CalculatorGUI {
     }
 
     #clearDigit() {
-
+        if (!this.#display.contains(this.#placeHolder) && this.#display.textContent > 1) {
+            this.#display.textContent = this.#display.textContent.slice(0, -1);
+        }
+        else {
+            this.#clearMemory();
+        }
     }
 }
 
