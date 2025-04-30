@@ -6,7 +6,6 @@ class Calculator {
     constructor() {
         this.validOperands = ['+', '-', '*', '/'];
         this.#setToBaseState();
-        this.#initializeDomElements();
     }
 
     #setToBaseState() {
@@ -14,11 +13,6 @@ class Calculator {
         this.#operand = null;
         this.#rightValue = null;
         this.result = null;
-    }
-
-    #initializeDomElements() {
-        this.display = document.getElementById('dsiplay-window');
-        this.buttons = document.getElementById('calculator-buttons');
     }
 
     #logSetterErrors(badValue, classVar) {
@@ -65,5 +59,19 @@ class Calculator {
         }
 
         this.#rightValue = value;
+    }
+}
+
+class CalculatorGUI {
+    #display;
+    #buttonContainer;
+
+    constructor() {
+        this.#setDOMNodeRefs();
+    }
+
+    #setDOMNodeRefs() {
+        this.#display = document.getElementById('display-window');
+        this.#buttonContainer = document.getElementById('calculator-buttons');
     }
 }
