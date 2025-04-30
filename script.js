@@ -126,8 +126,9 @@ class Calculator {
             this.calculatorDisplay.textContent = this.calculatorDisplay.textContent.slice(0, -1);
         }
 
-        else
+        else {
             this.#resetMemory(event);
+        }
     }
 
     #delegateKeyChoice(event) {
