@@ -8,11 +8,17 @@ class Calculator {
     };
 
     static assignOperationSYMBOL(operandNodeID) {
+        /**Compares HTML DOM Node.id's to switch cases.
+         * If an ID is matched, return the respective OPERATION Symbol()
+         * 
+         * If an invalid ID is passed, throw an error.
+         */
         switch(operandNodeID) {
             case 'add':         return Calculator.OPERATIONS.ADD;
             case 'subtract':    return Calculator.OPERATIONS.SUBTRACT;
             case 'multiply':    return Calculator.OPERATIONS.MULTIPLY;
             case 'divide':      return Calculator.OPERATIONS.DIVIDE;
+            default:            throw new Error(`Passed Value: ${operandNodeID} is not a valid OPERAND`);
         }
     }
 
@@ -22,7 +28,6 @@ class Calculator {
     #result;
 
     constructor() {
-        this.validOperands = ['+', '-', '*', '/'];
         this.#setToBaseState();
     }
 
