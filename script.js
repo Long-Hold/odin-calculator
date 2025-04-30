@@ -99,21 +99,20 @@ class Calculator {
     }
 
     #resetMemory(event) {
-        /*
-             Invoked when the AC button event listener is triggered.
-             Checks if the placeHolder text element exists, if not, clears screen
-             and adds it back.
-        */
-        const display = document.getElementById('display-window');
-        const placeholderActive = document.getElementById('placeholder');
-
-        if (!placeholderActive) {
-            display.textContent = '';
+        /** Resets the display and clears mathematic variables.
+         * If the place holder screen is already displayed, then it is not modified.
+         */
+        if (!this.#placeHolderIsActive()) {
+            this.calculatorDisplay.textContent = '';
             const placeholder = document.createElement('span');
             placeholder.setAttribute('id', 'placeholder');
             placeholder.textContent = '0';
-            display.appendChild(placeholder);
+            this.calculatorDisplay.appendChild(placeholder);
         }
+
+        this.firstDigit = null;
+        this.operand = null;
+        this.secondDigit = null;
     }
 
     #deleteLastInput(event) {
