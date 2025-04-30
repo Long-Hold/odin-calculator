@@ -137,6 +137,7 @@ class Calculator {
         if (event.target.classList.contains('digit-button') || 
             event.target.classList.contains('operand')) {
 
+                // Update the display with the selected input
                 this.#updateCalculatorDisplay(event.target.textContent);
 
                 // When an operand is selected, variables are intialized with inputted data
@@ -158,7 +159,8 @@ class Calculator {
 
     #updateCalculatorDisplay(message = 0) {
         // If the calculator screen is showing the default placeholder text,
-        // then we simply need to replace the text content of the display
+        // then we simply need to replace the text content of the display;
+
         if (this.#placeHolderIsActive()) {
             this.calculatorDisplay.textContent = message;
         }
@@ -225,6 +227,27 @@ class Calculator {
         const operatorIndex = displayArray.indexOf(operatorSymbol);
 
         return parseInt(displayArray.slice(operatorIndex + 1).join(''));
+    }
+
+    #convertVariablesToString() {
+        /**
+         * Takes the classes parameters that represent the equation,
+         * and converts them to a string to display on the calculator
+         */
+
+        const equationString = ``;
+
+        if (this.firstDigit) {
+            equationString += this.firstDigit;
+        }
+        if (this.operand) {
+            equationString += this.operand;
+        }
+        if (this.secondDigit) {
+            equationString += this.operand
+        }
+
+        return equationString;
     }
 
     calculate() {
