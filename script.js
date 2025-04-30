@@ -209,9 +209,22 @@ class Calculator {
     }
 
     #extractSecondDigitValues() {
-        const currentEquation = this.calculatorDisplay.textContent;
-        const operandIndex = currentEquation.indexOf(this.#returnOperandId());
-        return parseInt(currentEquation.slice(operandIndex + 1, -1));
+        const displayArray = Array.from(this.calculatorDisplay.textContent);
+        let operatorSymbol;
+
+        for (const e of displayArray) {
+            if (Number.isInteger(Number(e))) {
+                continue;
+            }
+            else {
+                operatorSymbol = e;
+                break;
+            }
+        }
+
+        const operatorIndex = displayArray.indexOf(operatorSymbol);
+
+        return parseInt(displayArray.slice(operatorIndex + 1).join(''));
     }
 
     calculate() {
