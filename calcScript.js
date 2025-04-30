@@ -15,6 +15,7 @@ class Calculator {
         this.#rightValue = null;
         this.result = null;
     }
+
     #initializeDomElements() {
         this.display = document.getElementById('dsiplay-window');
         this.buttons = document.getElementById('calculator-buttons');
@@ -29,15 +30,9 @@ class Calculator {
     }
 
     set leftValue(value) {
-        // Default initialization value
-        if (value === null) {
-            this.#leftValue = null;
-            return;
-        }
-
         if (typeof(value) !== 'number' || isNaN(value)) {
             this.#logSetterErrors(value, '#leftValue');
-            // call reset function
+            this.#setToBaseState();
             return;
         }
 
@@ -49,14 +44,9 @@ class Calculator {
     }
 
     set operand(symbol) {
-        if (symbol === null) {
-            this.#operand = null;
-            return;
-        }
-
         if (!this.validOperands.includes(symbol)) {
             this.#logSetterErrors(symbol, '#operand');
-            // call reset
+            this.#setToBaseState();
             return;
         }
 
@@ -68,14 +58,9 @@ class Calculator {
     }
 
     set rightValue(value) {
-        if (value === null) {
-            this.#rightValue = null;
-            return;
-        }
-
         if (typeof(value) !== 'number' || isNaN(value)) {
             this.#logSetterErrors(value, '#rightValue');
-            //call reset
+            this.#setToBaseState();
             return;
         }
 
