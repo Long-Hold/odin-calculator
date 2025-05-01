@@ -187,9 +187,11 @@ class CalculatorGUI {
          * This method passes numeric submissions to the display
          */
 
+        // Replace the placeholder node with the submitted digit
         if (this.#display.contains(document.getElementById('placeholder'))) {
             this.#display.textContent = event.target.textContent;
         }
+        // Keep appending digits if no placeholder active
         else {
             this.#display.textContent += event.target.textContent;
         }
