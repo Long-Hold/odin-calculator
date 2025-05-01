@@ -223,6 +223,20 @@ class CalculatorGUI {
         }
     }
 
+    #processOperandInput(event) {
+        /**When an operand button is selected, this method checks
+         * if it is an arithmetic operator or an assignment operator.
+         * 
+         * When an arithmetic operator is chosen, we need to check the state of the calculator.
+         * This is to prevent multiple arithmetic operators being processed.
+         * 
+         * Assignment operator '=' means we must execute the evaluation method from the
+         * calculator class.
+         */
+
+        
+    }
+
     #displayOperandInput(event) {
         this.#display.textContent += event.target.textContent;
     }
