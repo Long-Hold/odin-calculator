@@ -7,7 +7,7 @@ class Calculator {
         DIVIDE: Symbol('divide')
     };
 
-    static get STATE() {
+    static STATE = {
         /**
          * This static method is crucial for determining the state of the calculator
          * By checking on the state, we can manipulate on how the equation is built.
@@ -30,8 +30,8 @@ class Calculator {
             OPERAND: 72, // Calculator is on the operand
             RIGHT: 73, // Calculator is building right value
             EQUAL: 74, // Calculator is prepared to evaluate expression
-        };
-    }
+        }
+    };
 
     static assignOperationSYMBOL(operandNodeID) {
         /**Compares HTML DOM Node.id's to switch cases.
