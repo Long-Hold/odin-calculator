@@ -8,6 +8,22 @@ class Calculator {
     };
 
     static get STATE() {
+        /**
+         * This static method is crucial for determining the state of the calculator
+         * By checking on the state, we can manipulate on how the equation is built.
+         * 
+         * Example:
+         *  Display: 1 +
+         *  State: OPERAND
+         *  User Submission: '-' (another operand)
+         *  
+         *  Error checking:
+         *      if calc.state === OPERAND, and another operand submitted,
+         *      ignore input.
+         * 
+         * States allow easy checking that is more mechanical rather than manipulating
+         * DOM textContent to check for incorrect input.
+         */
         return {
             INITIAL: 70, // Calculator is 'empty'
             LEFT: 71, // Calculator is building left value
