@@ -158,7 +158,7 @@ class CalculatorGUI {
                 return;
 
             case 'operand-buttons':
-                // handle operand selection
+                this.#displayOperandInput(event);
                 return;
         }
     }
@@ -193,6 +193,10 @@ class CalculatorGUI {
         else {
             this.#display.textContent += event.target.textContent;
         }
+    }
+
+    #displayOperandInput(event) {
+        this.#display.textContent += event.target.textContent;
     }
 }
 
