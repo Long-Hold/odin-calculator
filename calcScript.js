@@ -110,6 +110,10 @@ class Calculator {
         this.#rightValue = value;
     }
 
+    get state() {
+        return this.#state;
+    }
+
     calculate() {
         switch(this.operand) {
             case Calculator.OPERATIONS.ADD:
@@ -163,6 +167,17 @@ class CalculatorGUI {
 
     #cachePlaceHolder() {
         this.#placeHolder = document.getElementById('placeholder').cloneNode(true);
+    }
+
+    #checkCalculatorState() {
+        /** Checks the Calculator.STATE before proceeding with input processing.
+         * Depending on the state returned, the input is either accepted or rejected.
+         * 
+         * Prevents illegal or syntactically incorrect input from being accepted into the
+         * engine.
+         */
+
+
     }
 
     #delegateEvent(event) {
@@ -234,7 +249,7 @@ class CalculatorGUI {
          * calculator class.
          */
 
-        
+
     }
 
     #displayOperandInput(event) {
