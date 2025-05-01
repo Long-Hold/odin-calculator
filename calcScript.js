@@ -7,6 +7,16 @@ class Calculator {
         DIVIDE: Symbol('divide')
     };
 
+    static get STATE() {
+        return {
+            INITIAL: 70, // Calculator is 'empty'
+            LEFT: 71, // Calculator is building left value
+            OPERAND: 72, // Calculator is on the operand
+            RIGHT: 73, // Calculator is building right value
+            EQUAL: 74, // Calculator is prepared to evaluate expression
+        };
+    }
+
     static assignOperationSYMBOL(operandNodeID) {
         /**Compares HTML DOM Node.id's to switch cases.
          * If an ID is matched, return the respective OPERATION Symbol()
@@ -25,6 +35,7 @@ class Calculator {
     #leftValue;
     #operand;
     #rightValue;
+    #state;
     #result;
 
     constructor() {
@@ -35,6 +46,7 @@ class Calculator {
         this.#leftValue = null;
         this.#operand = null;
         this.#rightValue = null;
+        this.#state = Calculator.STATE.INITIAL;
         this.#result = null;
     }
 
