@@ -115,6 +115,7 @@ class Calculator {
 class CalculatorGUI {
     #display;
     #buttonContainer;
+    #nodeplaceHolder;
     #placeHolder;
     #calcEngine;
 
@@ -153,7 +154,7 @@ class CalculatorGUI {
                 return;
 
             case 'numerical-buttons':
-                // handle numerical input
+                this.#displayNumericInput(event);
                 return;
 
             case 'operand-buttons':
@@ -173,11 +174,24 @@ class CalculatorGUI {
     }
 
     #clearDigit() {
-        if (!this.#display.contains(this.#placeHolder) && this.#display.textContent > 1) {
+        if (!this.#display.contains(this.#placeHolder) && this.#display.textContent.length > 1) {
             this.#display.textContent = this.#display.textContent.slice(0, -1);
         }
         else {
             this.#clearMemory();
+        }
+    }
+
+    #displayNumericInput(event) {
+        /**
+         * This method passes numeric submissions to the display
+         */
+
+        if (this.#display.contains(document.getElementById('placeholder'))) {
+            this.#display.textContent = event.target.textContent;
+        }
+        else {
+            this.#display.textContent += event.target.textContent;
         }
     }
 }
