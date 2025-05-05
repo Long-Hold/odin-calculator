@@ -131,6 +131,10 @@ class Calculator {
         return this.#state;
     }
 
+    set state(newState) {
+        
+    }
+
     calculate() {
         switch(this.operand) {
             case Calculator.OPERATIONS.ADD:
