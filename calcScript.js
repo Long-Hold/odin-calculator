@@ -102,8 +102,6 @@ class Calculator {
         }
     }
 
-
-
     #leftValue;
     #operand;
     #rightValue;
@@ -174,6 +172,11 @@ class Calculator {
 
     set state(inputType) {
         this.#state = Calculator.STATE_TRANSITIONS[this.#state][inputType];
+    }
+
+    get result() {
+        this.#result = this.calculate();
+        return this.#result;
     }
 
     calculate() {
