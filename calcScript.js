@@ -60,6 +60,7 @@ class Calculator {
         CLEAR: 'CLEAR',
     }
 
+    // Returns an appropriate STATE based on INPUT_TYPE and CURRENT_STATE
     static STATE_TRANSITIONS = {
         [Calculator.STATE.INITIAL]: {
             [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.LEFT, // Begin building left value
