@@ -48,6 +48,61 @@ class Calculator {
         EQUAL: 75, // Calculator is prepared to evaluate expression
     };
 
+    // Map input types to a string equivalent
+    static INPUT_TYPE = {
+        /**
+         * INPUT_TYPE.CLEAR represents the CLEAR MEMORY selection,
+         * NOT Clear Digit
+         * */
+        NUMERIC: 'NUMERIC',
+        OPERAND: 'OPERAND',
+        EQUAL: 'EQUAL',
+        CLEAR: 'CLEAR',
+    }
+
+    static STATE_TRANSITIONS = {
+        [Calculator.STATE.INITIAL]: {
+            [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.LEFT, // Begin building left value
+            // Invalid inputs, maintain state
+            [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.INITIAL,
+            [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.INITIAL,
+            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.INITIAL,
+        },
+
+        // Calculator has a left value
+        [Calculator.STATE.LEFT]: {
+            [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.LEFT, // Continue building left value
+            [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.OPERAND, // Left Value is finished
+            // Invalid inputs, maintain state
+            [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.LEFT,
+            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.INITIAL,
+        },
+
+        // Calculator has an operand registered, awaiting right value construction
+        [Calculator.STATE.OPERAND]: {
+            [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.RIGHT,
+            [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.OPERAND,
+            [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.OPERAND,
+            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.INITIAL,
+        },
+
+        [Calculator.STATE.RIGHT]: {
+            [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.RIGHT, // Continue building right value
+
+            // Evaluate current expression, store as left value, return to OPERAND state
+            [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.OPERAND,
+            [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.EQUAL,
+            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.INITIAL,
+        },
+
+        [Calculator.STATE.EQUAL]: {
+            [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.INITIAL, // Clear memory and start new
+            [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.OPERAND, // Use result as left value
+            [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.EQUAL,
+            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.INITIAL,
+        }
+    }
+
     static assignOperationSYMBOL(operandNodeID) {
         /**Compares HTML DOM Node.id's to switch cases.
          * If an ID is matched, return the respective OPERATION Symbol()
@@ -132,7 +187,7 @@ class Calculator {
     }
 
     set state(newState) {
-        
+
     }
 
     calculate() {
