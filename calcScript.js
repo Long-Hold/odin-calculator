@@ -23,29 +23,12 @@ class Calculator {
          * 
          * States allow easy checking that is more mechanical rather than manipulating
          * DOM textContent to check for incorrect input.
-         * 
-         * Special Mention:
-         * TRANSITION_FROM_RIGHT:   
-         *  This state is activated if the user
-         *  selects an OPERAND, but already has an expression,
-         *  meaning their display is something like this:
-         *      
-         *      1 + 2 x <---- This multiplier operand triggers this
-         *      TRANSITION_FROM_RIGHT state because the calculator
-         *      already has '1 + 2' stored in memory.
-         *      
-         * PURPOSE:
-         *  The purpose of TRANSITION_FROM_RIGHT is to tell
-         *  third party interfaces to either calculate the
-         *  exisitng expression first, and use the result of the value
-         *  to the left of Operand or to accomodate multiple expressions.
          */
         INITIAL: 70, // Calculator is 'empty'
         LEFT: 71, // Calculator is building left value
         OPERAND: 72, // Calculator is on the operand
         RIGHT: 73, // Calculator is building right value
-        TRANSITION_FROM_RIGHT: 74, // Calculator is awaiting for input from right
-        EQUAL: 75, // Calculator is prepared to evaluate expression
+        EQUAL: 74, // Calculator is prepared to evaluate expression
     };
 
     // Map input types to a string equivalent
