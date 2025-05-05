@@ -102,6 +102,8 @@ class Calculator {
         }
     }
 
+
+
     #leftValue;
     #operand;
     #rightValue;
@@ -170,8 +172,8 @@ class Calculator {
         return this.#state;
     }
 
-    set state(newState) {
-
+    set state(inputType) {
+        this.#state = Calculator.STATE_TRANSITIONS[this.#state][inputType];
     }
 
     calculate() {
