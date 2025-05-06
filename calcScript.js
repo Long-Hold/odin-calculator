@@ -304,6 +304,7 @@ class CalculatorGUI {
 
             case 'operand-buttons':
                 if (this.#validEngineState(buttonType)) {
+                    this.#submitOperandInput(event);
                     this.#displayOperandInput(event);
                 }
                 return;
@@ -377,6 +378,11 @@ class CalculatorGUI {
          */
 
 
+    }
+
+    #submitOperandInput(event) {
+        this.#calcEngine.operand = event.target.id;
+        this.#calcEngine.state = Calculator.INPUT_TYPE.OPERAND;
     }
 
     #displayOperandInput(event) {
