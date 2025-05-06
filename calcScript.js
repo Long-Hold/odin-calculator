@@ -288,6 +288,15 @@ class CalculatorGUI {
         }
     }
 
+    #submitNumericInput(event) {
+        /**
+         * Submits numeric input to the Calculator engine.
+         * 
+         * Depending on Calculator.STATE, either send to leftValue or Right Value.
+         * 
+         */
+    }
+
     #displayNumericInput(event) {
         /**
          * This method passes numeric submissions to the display
