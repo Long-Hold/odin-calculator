@@ -198,10 +198,6 @@ class Calculator {
         return this.#result;
     }
 
-    toString() {
-        return `${this.leftValue ? this.leftValue : 0} ${this.operand ? this.operand : ''} ${this.rightValue ? this.rightValue : ''}`;
-    }
-
     calculate() {
         switch(this.operand) {
             case Calculator.OPERATIONS.ADD:
@@ -244,6 +240,10 @@ class CalculatorGUI {
         this.#cachePlaceHolder();
     }
 
+    get calcEngine() {
+        return this.#calcEngine;
+    }
+
     #setDOMNodeRefs() {
         this.#display = document.getElementById('display-window');
         this.#buttonContainer = document.getElementById('calculator-buttons');
@@ -264,8 +264,6 @@ class CalculatorGUI {
          * Prevents illegal or syntactically incorrect input from being accepted into the
          * engine.
          */
-
-
     }
 
     #delegateEvent(event) {
@@ -283,6 +281,7 @@ class CalculatorGUI {
                 return;
 
             case 'numerical-buttons':
+                this.#submitNumericInput(event);
                 this.#displayNumericInput(event);
                 return;
 
@@ -318,6 +317,17 @@ class CalculatorGUI {
          * Depending on Calculator.STATE, either send to leftValue or Right Value.
          * 
          */
+
+        if (this.#calcEngine.state === Calculator.STATE.INITIAL ||
+            this.#calcEngine.state === Calculator.STATE.LEFT) {
+                this.#calcEngine.leftValue = event.target.textContent;
+            }
+
+        else {
+            this.#calcEngine.rightValue = event.target.textContent;
+        }
+
+        this.#calcEngine.state = Calculator.INPUT_TYPE.NUMERIC;
     }
 
     #displayNumericInput(event) {
