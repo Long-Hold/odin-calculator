@@ -124,6 +124,13 @@ class Calculator {
         console.error(`Invalid Value: ${badValue}\nPassed To: ${classVar}`);
     }
 
+    #logSTATEErrors(state, classVar) {
+        /** Called when a class variable assignment
+         * is attempted while calculator is in an invalid state
+         */
+        console.error(`Invalid Process: Cannot assign ${classVar} while in STATE ${state}`);
+    }
+
     get leftValue() {
         return this.#leftValue;
     }
@@ -135,7 +142,19 @@ class Calculator {
             return;
         }
 
-        this.#leftValue = value;
+        switch(this.state) {
+            case Calculator.STATE.INITIAL: 
+                this.#leftValue = value;
+                break;
+
+            case Calculator.STATE.LEFT:
+                this.#leftValue = parseFloat(`${this.#leftValue}${value}`);
+                break;
+            
+            default:
+                this.#logSTATEErrors(this.state, '#leftValue');
+                return;
+        }
     }
 
     get operand() {
