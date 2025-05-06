@@ -182,7 +182,19 @@ class Calculator {
             return;
         }
 
-        this.#rightValue = value;
+        switch(this.state) {
+            case Calculator.STATE.OPERAND: 
+                this.#rightValue = value;
+                break;
+
+            case Calculator.STATE.RIGHT:
+                this.#rightValue = parseFloat(`${this.#rightValue}${value}`);
+                break;
+            
+            default:
+                this.#logSTATEErrors(this.state, '#leftValue');
+                return;
+        }
     }
 
     get state() {
