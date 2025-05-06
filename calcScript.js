@@ -198,6 +198,10 @@ class Calculator {
         return this.#result;
     }
 
+    toString() {
+        return `${this.leftValue ? this.leftValue : 0} ${this.operand ? this.operand : ''} ${this.rightValue ? this.rightValue : ''}`;
+    }
+
     calculate() {
         switch(this.operand) {
             case Calculator.OPERATIONS.ADD:
