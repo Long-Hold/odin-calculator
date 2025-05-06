@@ -304,8 +304,7 @@ class CalculatorGUI {
 
             case 'operand-buttons':
                 if (this.#validEngineState(buttonType)) {
-                    this.#submitOperandInput(event);
-                    this.#displayOperandInput(event);
+                    this.#processOperandInput(event);
                 }
                 return;
         }
@@ -377,7 +376,14 @@ class CalculatorGUI {
          * calculator class.
          */
 
-
+        if (event.target.id === 'equal') {
+            this.#calcEngine.state = Calculator.INPUT_TYPE.EQUAL;
+            this.#displayCalculation();
+        }
+        else {
+            this.#submitOperandInput(event);
+            this.#displayOperandInput(event);
+        }
     }
 
     #submitOperandInput(event) {
@@ -387,6 +393,10 @@ class CalculatorGUI {
 
     #displayOperandInput(event) {
         this.#display.textContent += event.target.textContent;
+    }
+
+    #displayCalculation() {
+        this.#display.textContent += `= ${this.#calcEngine.calculate()}`;
     }
 }
 
