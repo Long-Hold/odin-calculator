@@ -257,13 +257,28 @@ class CalculatorGUI {
         this.#placeHolder = document.getElementById('placeholder').cloneNode(true);
     }
 
-    #checkCalculatorState() {
+    #validEngineState(buttonType) {
         /** Checks the Calculator.STATE before proceeding with input processing.
          * Depending on the state returned, the input is either accepted or rejected.
          * 
          * Prevents illegal or syntactically incorrect input from being accepted into the
          * engine.
          */
+
+        switch (buttonType) {
+            case 'numerical-buttons':
+                return [
+                    Calculator.STATE.INITIAL,
+                    Calculator.STATE.LEFT,
+                    Calculator.STATE.OPERAND, 
+                    Calculator.STATE.RIGHT
+                ].includes(this.#calcEngine.state);
+            case 'operand-buttons':
+                return [
+                    Calculator.STATE.LEFT,
+                    Calculator.STATE.RIGHT
+                ].includes(this.#calcEngine.state);
+        }
     }
 
     #delegateEvent(event) {
@@ -281,12 +296,16 @@ class CalculatorGUI {
                 return;
 
             case 'numerical-buttons':
-                this.#submitNumericInput(event);
-                this.#displayNumericInput(event);
+                if (this.#validEngineState(buttonType)) {
+                    this.#submitNumericInput(event);
+                    this.#displayNumericInput(event);
+                }
                 return;
 
             case 'operand-buttons':
-                this.#displayOperandInput(event);
+                if (this.#validEngineState(buttonType)) {
+                    this.#displayOperandInput(event);
+                }
                 return;
         }
     }
@@ -317,14 +336,15 @@ class CalculatorGUI {
          * Depending on Calculator.STATE, either send to leftValue or Right Value.
          * 
          */
+        const value = parseFloat(event.target.textContent);
 
         if (this.#calcEngine.state === Calculator.STATE.INITIAL ||
             this.#calcEngine.state === Calculator.STATE.LEFT) {
-                this.#calcEngine.leftValue = event.target.textContent;
+                this.#calcEngine.leftValue = value;
             }
 
         else {
-            this.#calcEngine.rightValue = event.target.textContent;
+            this.#calcEngine.rightValue = value;
         }
 
         this.#calcEngine.state = Calculator.INPUT_TYPE.NUMERIC;
