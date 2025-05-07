@@ -309,6 +309,8 @@ class CalculatorGUI {
         const buttonType = event.target.parentNode.id;
 
         switch (buttonType) {
+            case 'reset-buttons':
+                return true;
             case 'numerical-buttons':
                 return [
                     Calculator.STATE.INITIAL,
@@ -316,6 +318,7 @@ class CalculatorGUI {
                     Calculator.STATE.OPERAND, 
                     Calculator.STATE.RIGHT
                 ].includes(this.#calcEngine.state);
+
             case 'operand-buttons':
                 return [
                     Calculator.STATE.LEFT,
