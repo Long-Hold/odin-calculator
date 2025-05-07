@@ -179,6 +179,10 @@ class Calculator {
     }
 
     set operand(operandNodeID) {
+        if (operandNodeID === null) {
+            this.#operand = null;
+            return;
+        }
         try {
             this.#operand = Calculator.assignOperationSYMBOL(operandNodeID);
         }
@@ -408,12 +412,19 @@ class CalculatorGUI {
                 if (leftValStr.length === 1) {
                     this.#clearMemory();
                 }
+
                 else {
                     this.#calcEngine.state = Calculator.INPUT_TYPE.CLEAR;
                     this.#submitNumericInput(leftValStr.slice(0, -1));
                     this.#displayNumericInput()
                 }
                 return;
+            
+            case Calculator.STATE.OPERAND:
+                this.calcEngine.state = Calculator.INPUT_TYPE.CLEAR;
+                this.#calcEngine.operand = null;
+                this.#displayOperandInput();
+
 
         }
 
@@ -488,7 +499,9 @@ class CalculatorGUI {
     }
 
     #displayOperandInput() {
-        this.#display.textContent += ` ${CalculatorGUI.OPERAND_SYMBOLS[this.calcEngine.operand]} `;
+        this.#display.textContent = this.calcEngine.operand 
+        ? `${this.#calcEngine.leftValue} ${CalculatorGUI.OPERAND_SYMBOLS[this.calcEngine.operand]} ` 
+        : `${this.#calcEngine.leftValue} `
     }
 
     #displayCalculation() {
