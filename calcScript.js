@@ -424,15 +424,9 @@ class CalculatorGUI {
                 this.calcEngine.state = Calculator.INPUT_TYPE.CLEAR;
                 this.#calcEngine.operand = null;
                 this.#displayOperandInput();
+                return;
 
 
-        }
-
-        if (!this.#display.contains(this.#placeHolder) && this.#display.textContent.length > 1) {
-            this.#display.textContent = this.#display.textContent.slice(0, -1);
-        }
-        else {
-            this.#clearMemory();
         }
     }
 
