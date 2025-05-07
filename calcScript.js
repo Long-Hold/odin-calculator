@@ -33,10 +33,9 @@ class Calculator {
 
     // Map input types to a string equivalent
     static INPUT_TYPE = {
-        /**
-         * INPUT_TYPE.CLEAR represents the CLEAR MEMORY selection,
-         * NOT Clear Digit
-         * */
+        /** CLEAR goes back to previous STATE
+         * unless STATE is EQUAL or INITIAL
+         */
         NUMERIC: 'NUMERIC',
         OPERAND: 'OPERAND',
         EQUAL: 'EQUAL',
@@ -46,21 +45,32 @@ class Calculator {
 
     // Returns an appropriate STATE based on INPUT_TYPE and CURRENT_STATE
     static STATE_TRANSITIONS = {
+        /**TRANSITION PATTERN:
+         * INITIAL => LEFT => OPERAND => RIGHT => EQUAL
+         * 
+         * MULTI EQUATION PATTERN:
+         * INITIAL => LEFT => OPERAND => RIGHT => OPERAND ... => EQUAL
+         */
         [Calculator.STATE.INITIAL]: {
             [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.LEFT, // Begin building left value
+            
             // Invalid inputs, maintain state
             [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.INITIAL,
             [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.INITIAL,
-            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.INITIAL,
+            [Calculator.INPUT_TYPE.RESET]: Calculator.STATE.INITIAL,
         },
 
         // Calculator has a left value
         [Calculator.STATE.LEFT]: {
             [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.LEFT, // Continue building left value
             [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.OPERAND, // Left Value is finished
-            // Invalid inputs, maintain state
+            
+            // Invalid input, maintain state
             [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.LEFT,
+
+            // Go back one state or revert to INITIAL
             [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.INITIAL,
+            [Calculator.INPUT_TYPE.RESET]: Calculator.STATE.INITIAL,
         },
 
         // Calculator has an operand registered, awaiting right value construction
@@ -68,7 +78,8 @@ class Calculator {
             [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.RIGHT,
             [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.OPERAND,
             [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.OPERAND,
-            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.INITIAL,
+            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.LEFT,
+            [Calculator.INPUT_TYPE.RESET]: Calculator.STATE.INITIAL,
         },
 
         [Calculator.STATE.RIGHT]: {
@@ -76,15 +87,20 @@ class Calculator {
 
             // Evaluate current expression, store as left value, return to OPERAND state
             [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.OPERAND,
+
             [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.EQUAL,
-            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.INITIAL,
+            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.OPERAND,
+            [Calculator.INPUT_TYPE.RESET]: Calculator.STATE.INITIAL,
         },
 
         [Calculator.STATE.EQUAL]: {
             [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.INITIAL, // Clear memory and start new
             [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.OPERAND, // Use result as left value
             [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.EQUAL,
-            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.INITIAL,
+
+            // CLEAR will allow the user to modify the right value and exit the EQUAL state
+            [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.RIGHT,
+            [Calculator.INPUT_TYPE.RESET]: Calculator.STATE.INITIAL,
         }
     }
 
