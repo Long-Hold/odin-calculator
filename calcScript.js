@@ -430,6 +430,8 @@ class CalculatorGUI {
     }
 
     #displayCalculation() {
+        // Call the engines calculate method, then retrieve the result for display
+        this.#calcEngine.calculate();
         this.#display.textContent += ` = ${this.#calcEngine.result}`;
     }
 }
