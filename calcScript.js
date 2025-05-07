@@ -386,6 +386,19 @@ class CalculatorGUI {
     }
 
     #clearDigit() {
+        /**Allows the user to clear the last accepted value from the calculator.
+         * Depending on the calculators state, signal the engine to go back one state.
+         * 
+         * E.G.
+         *  Screen: 120 + 135
+         *  Input: CLEAR
+         *  STATE: RIGHT
+         *  
+         *  If rightValue Length > 1, remove digit but DO NOT revert state
+         *  because there is still a value in rightValue
+         *  
+         *  Else Signal to ENGINE to TRANSITION BACK state once right value is cleared
+         */
         if (!this.#display.contains(this.#placeHolder) && this.#display.textContent.length > 1) {
             this.#display.textContent = this.#display.textContent.slice(0, -1);
         }
@@ -419,15 +432,23 @@ class CalculatorGUI {
         /**
          * This method passes numeric submissions to the display
          */
-
+        switch (this.#calcEngine.state) {
+            case Calculator.STATE.LEFT:
+                this.#display.textContent = this.#calcEngine.leftValue;
+                break;
+            case Calculator.STATE.RIGHT:
+                const operand = CalculatorGUI.OPERAND_SYMBOLS[this.#calcEngine.operand];
+                this.#display.textContent = `${this.#calcEngine.leftValue} ${operand} ${this.#calcEngine.rightValue}`;
+                break;
+        }
         // Replace the placeholder node with the submitted digit
-        if (this.#display.contains(document.getElementById('placeholder'))) {
-            this.#display.textContent = event.target.textContent;
-        }
-        // Keep appending digits if no placeholder active
-        else {
-            this.#display.textContent += event.target.textContent;
-        }
+        // if (this.#display.contains(document.getElementById('placeholder'))) {
+        //     this.#display.textContent = this.#calcEngine.leftValue;
+        // }
+        // // Keep appending digits if no placeholder active
+        // else {
+        //     this.#display.textContent += event.target.textContent;
+        // }
     }
 
     #processOperandInput(event) {
