@@ -197,6 +197,11 @@ class Calculator {
     }
 
     set rightValue(value) {
+        if (value === null) {
+            this.#rightValue = null;
+            return;
+        }
+
         if (typeof(value) !== 'number' || isNaN(value)) {
             this.#logSetterErrors(value, '#rightValue');
             this.#setToBaseState();
@@ -421,12 +426,27 @@ class CalculatorGUI {
                 return;
             
             case Calculator.STATE.OPERAND:
-                this.calcEngine.state = Calculator.INPUT_TYPE.CLEAR;
+                this.#calcEngine.state = Calculator.INPUT_TYPE.CLEAR;
                 this.#calcEngine.operand = null;
                 this.#displayOperandInput();
                 return;
+            
+            case Calculator.STATE.RIGHT:
+                const rightValStr = this.#calcEngine.rightValue.toString();
+                this.#calcEngine.state = Calculator.INPUT_TYPE.CLEAR;
+                if (rightValStr.length === 1) {
+                    // If we are removing the last digit in right value
+                    // Then we set it to null, and update the display with just the
+                    // Left value and operand
+                    this.#calcEngine.rightValue = null;
+                    this.#displayOperandInput();
+                }
 
-
+                else {
+                    this.#submitNumericInput(rightValStr.slice(0, -1));
+                    this.#displayNumericInput();
+                }
+                return;
         }
     }
 
