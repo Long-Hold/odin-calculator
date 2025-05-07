@@ -357,6 +357,7 @@ class CalculatorGUI {
 
         // Record the class that the event came from (the parent container)
         const buttonType = event.target.parentNode.id;
+        const textContent = event.target.textContent;
 
         // TODO: Handle different classes of events (numeric, operand, clear buttons)
         switch (buttonType) {
@@ -365,8 +366,8 @@ class CalculatorGUI {
                 return;
 
             case 'numerical-buttons':
-                this.#submitNumericInput(event);
-                this.#displayNumericInput(event);
+                this.#submitNumericInput(textContent);
+                this.#displayNumericInput();
                 return;
 
             case 'operand-buttons':
@@ -376,7 +377,7 @@ class CalculatorGUI {
     }
 
     #handleResetButtons(event) {
-        event.target.id === 'clear-memory'? this.#clearMemory() : this.#clearDigit();
+        event.target.id === 'clear-memory'? this.#clearMemory() : this.#clearDigit(event);
     }
 
     #clearMemory() {
@@ -385,7 +386,7 @@ class CalculatorGUI {
         this.#calcEngine.resetMemory();
     }
 
-    #clearDigit() {
+    #clearDigit(event) {
         /**Allows the user to clear the last accepted value from the calculator.
          * Depending on the calculators state, signal the engine to go back one state.
          * 
@@ -394,11 +395,28 @@ class CalculatorGUI {
          *  Input: CLEAR
          *  STATE: RIGHT
          *  
-         *  If rightValue Length > 1, remove digit but DO NOT revert state
-         *  because there is still a value in rightValue
-         *  
-         *  Else Signal to ENGINE to TRANSITION BACK state once right value is cleared
+         *  If rightValue Length > 1, Temporarily revert state back to previous STATE,
+         *  submit the shortened value, and return back to original state
          */
+        switch (this.#calcEngine.state) {
+            case Calculator.STATE.INITIAL:
+                this.#clearMemory();
+                return;
+            
+            case Calculator.STATE.LEFT:
+                const leftValStr = this.#calcEngine.leftValue.toString();
+                if (leftValStr.length === 1) {
+                    this.#clearMemory();
+                }
+                else {
+                    this.#calcEngine.state = Calculator.INPUT_TYPE.CLEAR;
+                    this.#submitNumericInput(leftValStr.slice(0, -1));
+                    this.#displayNumericInput()
+                }
+                return;
+
+        }
+
         if (!this.#display.contains(this.#placeHolder) && this.#display.textContent.length > 1) {
             this.#display.textContent = this.#display.textContent.slice(0, -1);
         }
@@ -407,14 +425,14 @@ class CalculatorGUI {
         }
     }
 
-    #submitNumericInput(event) {
+    #submitNumericInput(textContent) {
         /**
          * Submits numeric input to the Calculator engine.
          * 
          * Depending on Calculator.STATE, either send to leftValue or Right Value.
          * 
          */
-        const value = parseFloat(event.target.textContent);
+        const value = parseFloat(textContent);
 
         if (this.#calcEngine.state === Calculator.STATE.INITIAL ||
             this.#calcEngine.state === Calculator.STATE.LEFT) {
@@ -428,7 +446,7 @@ class CalculatorGUI {
         this.#calcEngine.state = Calculator.INPUT_TYPE.NUMERIC;
     }
 
-    #displayNumericInput(event) {
+    #displayNumericInput() {
         /**
          * This method passes numeric submissions to the display
          */
@@ -441,14 +459,6 @@ class CalculatorGUI {
                 this.#display.textContent = `${this.#calcEngine.leftValue} ${operand} ${this.#calcEngine.rightValue}`;
                 break;
         }
-        // Replace the placeholder node with the submitted digit
-        // if (this.#display.contains(document.getElementById('placeholder'))) {
-        //     this.#display.textContent = this.#calcEngine.leftValue;
-        // }
-        // // Keep appending digits if no placeholder active
-        // else {
-        //     this.#display.textContent += event.target.textContent;
-        // }
     }
 
     #processOperandInput(event) {
