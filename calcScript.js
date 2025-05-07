@@ -239,6 +239,13 @@ class Calculator {
 }
 
 class CalculatorGUI {
+    static OPERAND_SYMBOLS = {
+        [Calculator.OPERATIONS.ADD]: '+',
+        [Calculator.OPERATIONS.SUBTRACT]: '-',
+        [Calculator.OPERATIONS.MULTIPLY]: '×',
+        [Calculator.OPERATIONS.DIVIDE]: '÷'
+    };
+
     #display;
     #buttonContainer;
     #nodeplaceHolder;
@@ -404,7 +411,7 @@ class CalculatorGUI {
     }
 
     #displayOperandInput(event) {
-        this.#display.textContent += event.target.textContent;
+        this.#display.textContent += ` ${CalculatorGUI.OPERAND_SYMBOLS[this.calcEngine.operand]} `;
     }
 
     #displayCalculation() {
