@@ -297,6 +297,9 @@ class CalculatorGUI {
          * 
          * Prevents illegal or syntactically incorrect input from being accepted into the
          * engine.
+         * 
+         * 'equal' is in the same container as the other operands, so it must be specifically
+         * checked via ID, and before any parent node is checked.
          */
 
         if (event.target.id === 'equal') {
