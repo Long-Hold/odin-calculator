@@ -386,7 +386,7 @@ class CalculatorGUI {
     }
 
     #handleResetButtons(event) {
-        event.target.id === 'clear-memory'? this.#clearMemory() : this.#clearDigit(event);
+        event.target.id === 'clear-memory'? this.#clearMemory() : this.#clearDigit();
     }
 
     #clearMemory() {
@@ -395,7 +395,7 @@ class CalculatorGUI {
         this.#calcEngine.resetMemory();
     }
 
-    #clearDigit(event) {
+    #clearDigit() {
         /**Allows the user to clear the last accepted value from the calculator.
          * Depending on the calculators state, signal the engine to go back one state.
          * 
@@ -447,6 +447,9 @@ class CalculatorGUI {
                     this.#displayNumericInput();
                 }
                 return;
+            
+            case Calculator.STATE.EQUAL:
+                this.#clearMemory();
         }
     }
 
