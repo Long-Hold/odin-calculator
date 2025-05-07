@@ -206,31 +206,43 @@ class Calculator {
     }
 
     get result() {
-        this.#result = this.calculate();
         return this.#result;
     }
 
+    set result(value) {
+        this.#result = value;
+    }
+
     calculate() {
+        if (this.state !== Calculator.STATE.EQUAL) {
+            this.#logSTATEErrors(this.state, `result`);
+            return;
+        }
+
         switch(this.operand) {
             case Calculator.OPERATIONS.ADD:
-                return this.leftValue + this.rightValue;
+                this.result = this.leftValue + this.rightValue;
+                break;
 
             case Calculator.OPERATIONS.SUBTRACT:
-                return this.leftValue - this.rightValue;
+                this.result = this.leftValue - this.rightValue;
+                break;
             
             case Calculator.OPERATIONS.MULTIPLY:
-                return this.leftValue * this.rightValue;
+                this.result = this.leftValue * this.rightValue;
+                break;
             
             case Calculator.OPERATIONS.DIVIDE:
-                return this.rightValue !== 0 
-                ? this.leftValue / this.rightValue
-                : this.#setToBaseState();
+                this.rightValue !== 0 
+                ? this.result = this.leftValue / this.rightValue
+                : this.resetMemory();
+                break;
             
             default:
                 console.error('Invalid OPERATION submitted.')
-                this.#setToBaseState();
-                return;
-        }
+                this.resetMemory();
+                break;
+        };
     }
 
     resetMemory() {
