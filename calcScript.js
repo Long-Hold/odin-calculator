@@ -291,13 +291,19 @@ class CalculatorGUI {
         this.#placeHolder = document.getElementById('placeholder').cloneNode(true);
     }
 
-    #validEngineState(buttonType) {
+    #validEngineState(event) {
         /** Checks the Calculator.STATE before proceeding with input processing.
          * Depending on the state returned, the input is either accepted or rejected.
          * 
          * Prevents illegal or syntactically incorrect input from being accepted into the
          * engine.
          */
+
+        if (event.target.id === 'equal') {
+            return this.#calcEngine.state === Calculator.STATE.RIGHT;
+        }
+
+        const buttonType = event.target.parentNode.id;
 
         switch (buttonType) {
             case 'numerical-buttons':
@@ -320,7 +326,12 @@ class CalculatorGUI {
             return;
         }
 
-        // Record the class that event came from (its container)
+        // Check if the submitted input follows valid state
+        if (!this.#validEngineState(event)) {
+            return;
+        }
+
+        // Record the class that the event came from (the parent container)
         const buttonType = event.target.parentNode.id;
 
         // TODO: Handle different classes of events (numeric, operand, clear buttons)
@@ -330,16 +341,12 @@ class CalculatorGUI {
                 return;
 
             case 'numerical-buttons':
-                if (this.#validEngineState(buttonType)) {
-                    this.#submitNumericInput(event);
-                    this.#displayNumericInput(event);
-                }
+                this.#submitNumericInput(event);
+                this.#displayNumericInput(event);
                 return;
 
             case 'operand-buttons':
-                if (this.#validEngineState(buttonType)) {
-                    this.#processOperandInput(event);
-                }
+                this.#processOperandInput(event);
                 return;
         }
     }
