@@ -401,7 +401,7 @@ class CalculatorGUI {
         }
         else {
             this.#submitOperandInput(event);
-            this.#displayOperandInput(event);
+            this.#displayOperandInput();
         }
     }
 
@@ -410,7 +410,7 @@ class CalculatorGUI {
         this.#calcEngine.state = Calculator.INPUT_TYPE.OPERAND;
     }
 
-    #displayOperandInput(event) {
+    #displayOperandInput() {
         this.#display.textContent += ` ${CalculatorGUI.OPERAND_SYMBOLS[this.calcEngine.operand]} `;
     }
 
