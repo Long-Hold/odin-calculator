@@ -41,6 +41,7 @@ class Calculator {
         OPERAND: 'OPERAND',
         EQUAL: 'EQUAL',
         CLEAR: 'CLEAR',
+        RESET: 'RESET-MEMORY',
     }
 
     // Returns an appropriate STATE based on INPUT_TYPE and CURRENT_STATE
@@ -311,6 +312,7 @@ class CalculatorGUI {
         switch (buttonType) {
             case 'reset-buttons':
                 return true;
+
             case 'numerical-buttons':
                 return [
                     Calculator.STATE.INITIAL,
