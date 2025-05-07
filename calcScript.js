@@ -240,6 +240,9 @@ class Calculator {
 
 class CalculatorGUI {
     static OPERAND_SYMBOLS = {
+        /**Converts Calculator Class SYMBOLS to 
+         * char literals that can be displayed on a browser
+         */
         [Calculator.OPERATIONS.ADD]: '+',
         [Calculator.OPERATIONS.SUBTRACT]: '-',
         [Calculator.OPERATIONS.MULTIPLY]: '×',
