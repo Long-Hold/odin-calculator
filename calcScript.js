@@ -415,7 +415,7 @@ class CalculatorGUI {
     }
 
     #displayCalculation() {
-        this.#display.textContent += `= ${this.#calcEngine.calculate()}`;
+        this.#display.textContent += ` = ${this.#calcEngine.calculate()}`;
     }
 }
 
