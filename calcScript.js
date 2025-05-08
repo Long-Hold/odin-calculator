@@ -534,6 +534,10 @@ class CalculatorGUI {
         : `${this.#calcEngine.leftValue} `
     }
 
+    #isInt(number) {
+        return number % 1 === 0;
+    }
+
     #displayCalculation() {
         // Call the engines calculate method, then retrieve the result for display
         this.#calcEngine.calculate();
