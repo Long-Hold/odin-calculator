@@ -538,13 +538,23 @@ class CalculatorGUI {
         return number % 1 === 0;
     }
 
+    #formatFloat(number) {
+        // Only allows up to 4 decimal places for floats
+        return new Intl.NumberFormat( 'en-US', {
+            style:'decimal', 
+            maximumFractionDigits: 4
+        }).format(number,);
+    }
+
     #displayCalculation() {
         // Call the engines calculate method, then retrieve the result for display
         this.#calcEngine.calculate();
+        const result = this.#calcEngine.result;
+
         this.#display.textContent += ' = ' + (
-        this.#isInt(this.#calcEngine.result)
-        ? this.#calcEngine.result
-        : this.#calcEngine.result.toFixed(2)
+        this.#isInt(result)
+        ? result
+        : this.#formatFloat(result)
         );
     }
 }
