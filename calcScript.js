@@ -541,7 +541,11 @@ class CalculatorGUI {
     #displayCalculation() {
         // Call the engines calculate method, then retrieve the result for display
         this.#calcEngine.calculate();
-        this.#display.textContent += ` = ${this.#calcEngine.result}`;
+        this.#display.textContent += ' = ' + (
+        this.#isInt(this.#calcEngine.result)
+        ? this.#calcEngine.result
+        : this.#calcEngine.result.toFixed(2)
+        );
     }
 }
 
