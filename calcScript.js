@@ -86,7 +86,7 @@ class Calculator {
             [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.RIGHT, // Continue building right value
 
             // Evaluate current expression, store as left value, return to OPERAND state
-            [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.OPERAND,
+            [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.INITIAL,
 
             [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.EQUAL,
             [Calculator.INPUT_TYPE.CLEAR]: Calculator.STATE.OPERAND,
@@ -240,10 +240,10 @@ class Calculator {
     }
 
     calculate() {
-        if (this.state !== Calculator.STATE.EQUAL) {
-            this.#logSTATEErrors(this.state, `result`);
-            return;
-        }
+        // if (this.state !== Calculator.STATE.RIGHT || this.state !== Calculator.STATE.EQUAL) {
+        //     this.#logSTATEErrors(this.state, `result`);
+        //     return;
+        // }
 
         switch(this.operand) {
             case Calculator.OPERATIONS.ADD:
@@ -498,16 +498,29 @@ class CalculatorGUI {
          * 
          * Assignment operator '=' means we must execute the evaluation method from the
          * calculator class.
+         * 
+         * If the Engine is in State RIGHT, we need to evaluate the expression and store it
+         * in the leftValue, then re-assign the operand to the chosen expression.
          */
 
         if (event.target.id === 'equal') {
             this.#calcEngine.state = Calculator.INPUT_TYPE.EQUAL;
             this.#displayCalculation();
+            return;
         }
-        else {
-            this.#submitOperandInput(event);
-            this.#displayOperandInput();
+
+        else if (this.#calcEngine.state === Calculator.STATE.RIGHT) {
+            // Evaluate the expression, which stores it in the result variable
+            this.#calcEngine.calculate();
+            this.#calcEngine.state = Calculator.INPUT_TYPE.OPERAND;
+
+            this.#submitNumericInput(this.#calcEngine.result);
+            this.#displayNumericInput();
         }
+
+        this.#submitOperandInput(event);
+        this.#displayOperandInput();
+
     }
 
     #submitOperandInput(event) {
