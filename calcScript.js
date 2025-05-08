@@ -523,7 +523,9 @@ class CalculatorGUI {
             return;
         }
 
-        else if (this.#calcEngine.state === Calculator.STATE.RIGHT) {
+        else if (this.#calcEngine.state === Calculator.STATE.RIGHT
+            || this.#calcEngine.state === Calculator.STATE.EQUAL
+        ) {
             // Evaluate the expression, which stores it in the result variable
             this.#calcEngine.calculate();
             this.#calcEngine.state = Calculator.INPUT_TYPE.OPERAND;
