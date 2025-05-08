@@ -50,6 +50,10 @@ class Calculator {
          * 
          * MULTI EQUATION PATTERN:
          * INITIAL => LEFT => OPERAND => RIGHT => OPERAND ... => EQUAL
+         * 
+         * PRESSING AN OPERAND FROM EQUAL USES THE RESULT AS LEFT VALUE
+         * 
+         * PRESSING A NUMERIC VALUE FROM EQUAL RESETS THE CALCULATOR
          */
         [Calculator.STATE.INITIAL]: {
             [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.LEFT, // Begin building left value
@@ -95,7 +99,9 @@ class Calculator {
 
         [Calculator.STATE.EQUAL]: {
             [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.INITIAL, // Clear memory and start new
-            [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.OPERAND, // Use result as left value
+
+            // Clear memory, store result in left, translate to operand
+            [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.INITIAL,
             [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.EQUAL,
 
             // CLEAR will allow the user to modify the right value and exit the EQUAL state
@@ -343,13 +349,15 @@ class CalculatorGUI {
                     Calculator.STATE.INITIAL,
                     Calculator.STATE.LEFT,
                     Calculator.STATE.OPERAND, 
-                    Calculator.STATE.RIGHT
+                    Calculator.STATE.RIGHT,
+                    Calculator.STATE.EQUAL,
                 ].includes(this.#calcEngine.state);
 
             case 'operand-buttons':
                 return [
                     Calculator.STATE.LEFT,
-                    Calculator.STATE.RIGHT
+                    Calculator.STATE.RIGHT,
+                    Calculator.STATE.EQUAL,
                 ].includes(this.#calcEngine.state);
         }
     }
