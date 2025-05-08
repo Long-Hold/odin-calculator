@@ -37,6 +37,7 @@ class Calculator {
          * unless STATE is EQUAL or INITIAL
          */
         NUMERIC: 'NUMERIC',
+        DECIMAL: 'DECIMAL',
         OPERAND: 'OPERAND',
         EQUAL: 'EQUAL',
         CLEAR: 'CLEAR',
