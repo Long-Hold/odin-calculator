@@ -3,18 +3,57 @@
  * decimal places are introduced.
  * 
  * Proposed solution:
- *  Store the decimal as a char in a class variable in the engine.
- *  Enter a state: decimal, to prevent additional decimals being entered
+ *  When the decimal button on the GUI is hit, a special series of methods are executed:
+ *      - If state is not INITIAL, LEFT, or RIGHT: ignore
+ *      - Else activate the decimal flag.
+ *          - We no longer pass the values to the engine in real time during this process
  * 
- *  When numeric value is entered, enter a new state:
- *      leftValueDecimal or rightValueDecimal, to signal we are building the decimal values
- *      Also prevents additional decimal points being entered
+ *      - If state is INITIAL: Preserve the placeholder '0' value, so the current str is
+ *      '0.'
+ *      - Else continue appending to the string
+ *      - Pass NUMERIC as INPUT_TYPE to engine
+ *          - This step is crucial, as it will take the calculator engine out of INITIAL state,
+ *          or preserve the logic behind 'building up' the values.
+ *          it also prepares the engine to receive an OPERAND and not reject it.
  *      
- *      Immediately convert leftValue into a float and append this value to the decimal place
- *      repeat process until an operand is selected, and we enter the operand state
+ *      - If an OPERAND is selected:
+ *          - set the decimal flag back to 'off' state
+ *          - parseFLoat(decimalString) is passed to either LEFT or RIGHT depending on state,
+ *              - This can be handled by existing submit numerical and display functions
+ *          - then pass the selected operand to the operand processing functions
  * 
- * Building the decimal:
- *  String concatenation - call a function to return newDecimal = parseFloat(val.toString() + value)
+ *      Edge Cases:
+ *          - User hits an operand from LEFT state, with a decimal, with no decimal values:
+ *              - If decimalString.length <== 1: don't pass to engine
+ *              - If STATE is Initial, and Decimal is active but no decimal values, pass '0'
+ *              to engine
+ *          
+ *          - User hits decimal from STATE OPERAND:
+ *              - Pass '0' to rightValue
+ *              - pass Numeric Value input type to enter RIGHT state
+ *              - Resume normal decimal building algorithm
+ *          
+ *         - User hits EQUAL or OPERAND from STATE RIGHT with only a '.' and no decimal values:
+ *              - if decimalString.length <== 1: don't pass to engine
+ *      
+ *      Additional implementations:
+ *          CLEAR functionality:
+ *              - If in STATE RIGHT or LEFT:
+ *                  if leftValue or rightValue (state dependent) is not float:
+ *                      perform normal CLEAR operations
+ * 
+ *                  else trigger the Decimal flag to true:
+ * 
+ *          Decimal values will require special clearing functionality.
+ *          For the most part, these can be sliced by the existing clear function until 
+ *          we reach the final decimal place.
+ *          
+ *          If user selects CLEAR on last decimal place digit: E.G. '1.5' <-- they will clear '5'
+ *              Re - initialize the respective value variable in the engine with just the whole
+ *              numbers (values to the left of the decimal), but maintain the '.' in display.
+ *          
+ *          If user select CLEAR on decimal itself: turn off decimal flag, delete from display
+ *          
  */
 
 class Calculator {
