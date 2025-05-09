@@ -1,3 +1,7 @@
+/**Displaying decimal points:
+ * Challenge: Display the 
+ */
+
 class Calculator {
     // An object containing operand symbols
     static OPERATIONS = {
@@ -58,7 +62,7 @@ class Calculator {
          */
         [Calculator.STATE.INITIAL]: {
             [Calculator.INPUT_TYPE.NUMERIC]: Calculator.STATE.LEFT, // Begin building left value
-            
+
             // Invalid inputs, maintain state
             [Calculator.INPUT_TYPE.OPERAND]: Calculator.STATE.INITIAL,
             [Calculator.INPUT_TYPE.EQUAL]: Calculator.STATE.INITIAL,
@@ -574,6 +578,17 @@ class CalculatorGUI {
         : this.#formatFloat(result)
         );
     }
+}
+
+function convertToDecimal(num) {
+  // Convert to string to count the number of digits
+  const numStr = Math.abs(num).toString();
+  
+  // Calculate the divisor (10 raised to the power of the number of digits)
+  const divisor = Math.pow(10, numStr.length);
+  
+  // Divide the number by the divisor to get the decimal format
+  return num / divisor;
 }
 
 const gui = new CalculatorGUI();
