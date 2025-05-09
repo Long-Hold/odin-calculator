@@ -1,5 +1,20 @@
 /**Displaying decimal points:
- * Challenge: Display the 
+ * Challenge: Display the decimal point on screen before any
+ * decimal places are introduced.
+ * 
+ * Proposed solution:
+ *  Store the decimal as a char in a class variable in the engine.
+ *  Enter a state: decimal, to prevent additional decimals being entered
+ * 
+ *  When numeric value is entered, enter a new state:
+ *      leftValueDecimal or rightValueDecimal, to signal we are building the decimal values
+ *      Also prevents additional decimal points being entered
+ *      
+ *      Immediately convert leftValue into a float and append this value to the decimal place
+ *      repeat process until an operand is selected, and we enter the operand state
+ * 
+ * Building the decimal:
+ *  String concatenation - call a function to return newDecimal = parseFloat(val.toString() + value)
  */
 
 class Calculator {
