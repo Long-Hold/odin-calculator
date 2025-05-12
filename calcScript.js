@@ -149,6 +149,7 @@ class Calculator {
         }
     }
 
+    #decimalActive;
     #leftValue;
     #operand;
     #rightValue;
@@ -160,6 +161,7 @@ class Calculator {
     }
 
     #setToBaseState() {
+        this.#decimalActive = false;
         this.#leftValue = null;
         this.#operand = null;
         this.#rightValue = null;
@@ -176,6 +178,19 @@ class Calculator {
          * is attempted while calculator is in an invalid state
          */
         console.error(`Invalid Process: Cannot assign ${classVar} while in STATE ${state}`);
+    }
+
+    get decimalActive() {
+        return this.#decimalActive;
+    }
+
+    set decimalActive(value) {
+        if (typeof(value) !== 'boolean') {
+            this.#logSetterErrors(value, 'decimalActive');
+            return;
+        }
+
+        this.#decimalActive = value;
     }
 
     get leftValue() {
