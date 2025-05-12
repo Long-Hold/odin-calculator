@@ -226,6 +226,7 @@ class Calculator {
 
         switch(this.state) {
             case Calculator.STATE.INITIAL:
+                // Preserve the placeholder '0' if decimal is first user input for leftValue
                 if (this.#valueIsDecimal(value)) {
                     this.#leftValue = `0${value}`;
                 }
