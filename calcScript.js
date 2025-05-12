@@ -488,6 +488,12 @@ class CalculatorGUI {
 
                 else {
                     this.#calcEngine.state = Calculator.INPUT_TYPE.CLEAR;
+
+                    // Check if we are removing the decimal from this value, reset flag if so.
+                    if (leftValStr.slice(-1) === '.') {
+                        this.#calcEngine.decimalActive = false;
+                    }
+
                     this.#submitNumericInput(leftValStr.slice(0, -1));
                     this.#displayNumericInput()
                 }
