@@ -180,6 +180,10 @@ class Calculator {
         console.error(`Invalid Process: Cannot assign ${classVar} while in STATE ${state}`);
     }
 
+    #valueIsDecimal(value) {
+        return value === '.';
+    }
+
     get decimalActive() {
         return this.#decimalActive;
     }
