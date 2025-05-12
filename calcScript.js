@@ -197,8 +197,12 @@ class Calculator {
         this.#decimalActive = value;
     }
 
-    get leftValue() {
+    #getNumericLeftValue() {
         return parseFloat(this.#leftValue);
+    }
+
+    get leftValue() {
+        return this.#leftValue;
     }
 
     set leftValue(value) {
