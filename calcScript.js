@@ -208,6 +208,10 @@ class Calculator {
         //     return;
         // }
 
+        if (this.#valueIsDecimal(value)) {
+            this.decimalActive = true;
+        }
+
         switch(this.state) {
             case Calculator.STATE.INITIAL: 
                 this.#leftValue = value;
