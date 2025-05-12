@@ -208,8 +208,16 @@ class Calculator {
         //     return;
         // }
 
+        // Check for decimal input, if already active then ignore multiple input attempts
+        // Otherwise set the flag to true
         if (this.#valueIsDecimal(value)) {
-            this.decimalActive = true;
+            switch(this.decimalActive) {
+                case true:
+                    return;
+                case false:
+                    this.decimalActive = true;
+                    break;
+            }
         }
 
         switch(this.state) {
