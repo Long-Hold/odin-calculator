@@ -210,7 +210,7 @@ class Calculator {
                 break;
 
             case Calculator.STATE.LEFT:
-                this.#leftValue = parseFloat(`${this.#leftValue}${value}`);
+                this.#leftValue = parseInt(`${this.#leftValue}${value}`);
                 break;
             
             default:
