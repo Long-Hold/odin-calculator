@@ -218,7 +218,7 @@ class Calculator {
                 break;
 
             case Calculator.STATE.LEFT:
-                this.#leftValue = parseInt(`${this.#leftValue}${value}`);
+                this.#leftValue = `${this.#leftValue}${value}`;
                 break;
             
             default:
@@ -255,19 +255,13 @@ class Calculator {
             return;
         }
 
-        if (typeof(value) !== 'number' || isNaN(value)) {
-            this.#logSetterErrors(value, '#rightValue');
-            this.#setToBaseState();
-            return;
-        }
-
         switch(this.state) {
             case Calculator.STATE.OPERAND: 
                 this.#rightValue = value;
                 break;
 
             case Calculator.STATE.RIGHT:
-                this.#rightValue = parseFloat(`${this.#rightValue}${value}`);
+                this.#rightValue = `${this.#rightValue}${value}`;
                 break;
             
             default:
