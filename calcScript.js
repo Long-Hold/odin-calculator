@@ -517,7 +517,6 @@ class CalculatorGUI {
          * Depending on Calculator.STATE, either send to leftValue or Right Value.
          * 
          */
-        const value = parseFloat(textContent);
 
         // If the user presses a Numeric value from EQUAL, signal to state
         // of numeric input to handle restarting calculator for new equation
@@ -527,11 +526,11 @@ class CalculatorGUI {
 
         if (this.#calcEngine.state === Calculator.STATE.INITIAL ||
             this.#calcEngine.state === Calculator.STATE.LEFT) {
-                this.#calcEngine.leftValue = value;
+                this.#calcEngine.leftValue = textContent;
             }
 
         else {
-            this.#calcEngine.rightValue = value;
+            this.#calcEngine.rightValue = textContent;
         }
 
         this.#calcEngine.state = Calculator.INPUT_TYPE.NUMERIC;
