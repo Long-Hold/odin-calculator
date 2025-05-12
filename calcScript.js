@@ -198,7 +198,7 @@ class Calculator {
     }
 
     get leftValue() {
-        return this.#leftValue;
+        return parseFloat(this.#leftValue);
     }
 
     set leftValue(value) {
@@ -246,7 +246,7 @@ class Calculator {
     }
 
     get rightValue() {
-        return this.#rightValue;
+        return parseFloat(this.#rightValue);
     }
 
     set rightValue(value) {
