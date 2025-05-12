@@ -194,7 +194,13 @@ class Calculator {
             return;
         }
 
-        this.#leftDecimalActive = value;
+        if (this.#leftValue.inlcudes('.')){
+            this.#leftDecimalActive = true;
+        }
+
+        else {
+            this.#leftDecimalActive = value;
+        }
     }
 
     #getNumericLeftValue() {
