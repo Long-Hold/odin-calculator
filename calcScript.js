@@ -225,8 +225,14 @@ class Calculator {
         }
 
         switch(this.state) {
-            case Calculator.STATE.INITIAL: 
-                this.#leftValue = value;
+            case Calculator.STATE.INITIAL:
+                if (this.#valueIsDecimal(value)) {
+                    this.#leftValue = `0${value}`;
+                }
+                
+                else {
+                    this.#leftValue = value;
+                }
                 break;
 
             case Calculator.STATE.LEFT:
