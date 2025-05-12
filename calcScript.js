@@ -194,6 +194,7 @@ class Calculator {
             return;
         }
 
+        // Prevent invalid boolean assignment if the leftValue does have a decimal
         if (this.#leftValue.inlcudes('.')){
             this.#leftDecimalActive = true;
         }
@@ -212,12 +213,6 @@ class Calculator {
     }
 
     set leftValue(value) {
-        // if (typeof(value) !== 'number' || isNaN(value)) {
-        //     this.#logSetterErrors(value, '#leftValue');
-        //     this.#setToBaseState();
-        //     return;
-        // }
-
         // Check for decimal input, if already active then ignore multiple input attempts
         // Otherwise set the flag to true
         if (this.#valueIsDecimal(value)) {
@@ -312,11 +307,6 @@ class Calculator {
     }
 
     calculate() {
-        // if (this.state !== Calculator.STATE.RIGHT || this.state !== Calculator.STATE.EQUAL) {
-        //     this.#logSTATEErrors(this.state, `result`);
-        //     return;
-        // }
-
         switch(this.operand) {
             case Calculator.OPERATIONS.ADD:
                 this.result = this.leftValue + this.rightValue;
