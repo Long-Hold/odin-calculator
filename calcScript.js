@@ -149,7 +149,7 @@ class Calculator {
         }
     }
 
-    #decimalActive;
+    #leftDecimalActive;
     #leftValue;
     #operand;
     #rightValue;
@@ -161,7 +161,7 @@ class Calculator {
     }
 
     #setToBaseState() {
-        this.#decimalActive = false;
+        this.#leftDecimalActive = false;
         this.#leftValue = null;
         this.#operand = null;
         this.#rightValue = null;
@@ -184,17 +184,17 @@ class Calculator {
         return value === '.';
     }
 
-    get decimalActive() {
-        return this.#decimalActive;
+    get leftDecimalActive() {
+        return this.#leftDecimalActive;
     }
 
-    set decimalActive(value) {
+    set leftDecimalActive(value) {
         if (typeof(value) !== 'boolean') {
             this.#logSetterErrors(value, 'decimalActive');
             return;
         }
 
-        this.#decimalActive = value;
+        this.#leftDecimalActive = value;
     }
 
     #getNumericLeftValue() {
@@ -215,11 +215,11 @@ class Calculator {
         // Check for decimal input, if already active then ignore multiple input attempts
         // Otherwise set the flag to true
         if (this.#valueIsDecimal(value)) {
-            switch(this.decimalActive) {
+            switch(this.leftDecimalActive) {
                 case true:
                     return;
                 case false:
-                    this.decimalActive = true;
+                    this.leftDecimalActive = true;
                     break;
             }
         }
@@ -491,7 +491,7 @@ class CalculatorGUI {
 
                     // Check if we are removing the decimal from this value, reset flag if so.
                     if (leftValStr.slice(-1) === '.') {
-                        this.#calcEngine.decimalActive = false;
+                        this.#calcEngine.leftDecimalActive = false;
                     }
 
                     this.#submitNumericInput(leftValStr.slice(0, -1));
