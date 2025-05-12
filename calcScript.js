@@ -198,11 +198,11 @@ class Calculator {
     }
 
     set leftValue(value) {
-        if (typeof(value) !== 'number' || isNaN(value)) {
-            this.#logSetterErrors(value, '#leftValue');
-            this.#setToBaseState();
-            return;
-        }
+        // if (typeof(value) !== 'number' || isNaN(value)) {
+        //     this.#logSetterErrors(value, '#leftValue');
+        //     this.#setToBaseState();
+        //     return;
+        // }
 
         switch(this.state) {
             case Calculator.STATE.INITIAL: 
