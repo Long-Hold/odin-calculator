@@ -3,15 +3,22 @@
  * decimal places are introduced.
  * 
  * Proposed solution:
- * Default values for left and right values in Engine class become 0.0
+ * Variable to track if a decimal value is being built.
  * 
- * The UI class automatically rounds values UP TO 4 places, so anything with .0 will be 
- * displayed as a whole number automatically.
+ * If decimal flag is true, then the left or right setters will store the input as a string,
+ * rather than as a number.
  * 
- * Pressing the '.' button will be a purely cosmetic process on the UI display.
+ * These setters will convert the strings back to float values based on certain STATE transitions:
+ *  LEFT -> OPERAND : leftValue converts string to float
+ *  RIGHT -> EQUAL  : rightValue converts string to float
+ *  RIGHT -> INITIAL: rightValue converts string to float (for expression chaining functionality)
  * 
- * How this changes value updates:
- *  - When the user selects a '.', all values sent 
+ * Decimal flag changes based on key inputs:
+ *  A setter receives a decimal as input: flag = true
+ *  Decimal is cleared from the string: flag = false
+ *  STATE is INITIAL, OPERAND, EQUAL: flag = false
+ * 
+ *  If flag = true and a decimal is received, input is ignored by the Engine.
  */
 
 class Calculator {
