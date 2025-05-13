@@ -656,11 +656,7 @@ class CalculatorGUI {
         this.#calcEngine.calculate();
         const result = this.#calcEngine.result;
 
-        this.#display.textContent += ' = ' + (
-        this.#isInt(result)
-        ? result
-        : this.#formatFloat(result)
-        );
+        this.#display.textContent += ' = ' + result;
     }
 }
 

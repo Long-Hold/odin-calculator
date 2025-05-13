@@ -42,7 +42,8 @@ header {
     box-shadow: 2px 2px 10px black;
     background-color: var(--customDarkGray);
     border-radius: 10px;
-    height: 466px;
+    min-height: 466px;
+    max-height: 100vh;
 }
 
 #display-window {
