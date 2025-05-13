@@ -533,6 +533,12 @@ class CalculatorGUI {
             case Calculator.STATE.RIGHT:
                 const rightValStr = this.#calcEngine.rightValue.toString();
                 this.#calcEngine.state = Calculator.INPUT_TYPE.CLEAR;
+
+                // Reset flag if the decimal is the char being deleted
+                if (rightValStr.slice(-1) === '.') {
+                    this.#calcEngine.rightDecimalActive = false;
+                }
+
                 if (rightValStr.length === 1) {
                     // If we are removing the last digit in right value
                     // Then we set it to null, and update the display with just the
