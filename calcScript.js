@@ -512,6 +512,20 @@ class CalculatorGUI {
          */
         console.log(event.key);
 
+        const key = event.key;
+        if (Number(key)) {
+            document.getElementById(key).click();
+        }
+
+        else if (key in CalculatorGUI.KEYBOARD_OPERAND_CONVERSION) {
+            const operand = CalculatorGUI.KEYBOARD_OPERAND_CONVERSION[key];
+            document.getElementById(operand).click();
+        }
+
+        else if (key in CalculatorGUI.KEYBOARD_UTIL_KEY_CONVERSION) {
+            const utilKey = CalculatorGUI.KEYBOARD_UTIL_KEY_CONVERSION[key];
+            document.getElementById(utilKey).click();
+        }
     }
 
     #handleResetButtons(event) {
