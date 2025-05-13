@@ -287,6 +287,10 @@ class Calculator {
         }
     }
 
+    #getNumericRightValue() {
+        return parseFloat(this.#rightValue);
+    }
+
     get rightValue() {
         return parseFloat(this.#rightValue);
     }
