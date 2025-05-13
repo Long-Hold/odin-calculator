@@ -1,26 +1,3 @@
-/**Displaying decimal points:
- * Challenge: Display the decimal point on screen before any
- * decimal places are introduced.
- * 
- * Proposed solution:
- * Variable to track if a decimal value is being built.
- * 
- * If decimal flag is true, then the left or right setters will store the input as a string,
- * rather than as a number.
- * 
- * These setters will convert the strings back to float values based on certain STATE transitions:
- *  LEFT -> OPERAND : leftValue converts string to float
- *  RIGHT -> EQUAL  : rightValue converts string to float
- *  RIGHT -> INITIAL: rightValue converts string to float (for expression chaining functionality)
- * 
- * Decimal flag changes based on key inputs:
- *  A setter receives a decimal as input: flag = true
- *  Decimal is cleared from the string: flag = false
- *  STATE is INITIAL, OPERAND, EQUAL: flag = false
- * 
- *  If flag = true and a decimal is received, input is ignored by the Engine.
- */
-
 class Calculator {
     // An object containing operand symbols
     static OPERATIONS = {
@@ -389,7 +366,6 @@ class CalculatorGUI {
 
     #display;
     #buttonContainer;
-    #nodeplaceHolder;
     #placeHolder;
     #calcEngine;
 
@@ -686,17 +662,6 @@ class CalculatorGUI {
         : this.#formatFloat(result)
         );
     }
-}
-
-function convertToDecimal(num) {
-  // Convert to string to count the number of digits
-  const numStr = Math.abs(num).toString();
-  
-  // Calculate the divisor (10 raised to the power of the number of digits)
-  const divisor = Math.pow(10, numStr.length);
-  
-  // Divide the number by the divisor to get the decimal format
-  return num / divisor;
 }
 
 const gui = new CalculatorGUI();
