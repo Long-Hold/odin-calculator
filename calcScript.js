@@ -349,22 +349,24 @@ class Calculator {
     }
 
     calculate() {
+        const leftNumericValue = this.#getNumericLeftValue();
+        const rightNumericValue = this.#getNumericRightValue();
         switch(this.operand) {
             case Calculator.OPERATIONS.ADD:
-                this.result = this.leftValue + this.rightValue;
+                this.result = leftNumericValue + rightNumericValue;
                 break;
 
             case Calculator.OPERATIONS.SUBTRACT:
-                this.result = this.leftValue - this.rightValue;
+                this.result = leftNumericValue - rightNumericValue;
                 break;
             
             case Calculator.OPERATIONS.MULTIPLY:
-                this.result = this.leftValue * this.rightValue;
+                this.result = leftNumericValue * rightNumericValue;
                 break;
             
             case Calculator.OPERATIONS.DIVIDE:
                 this.rightValue !== 0 
-                ? this.result = this.leftValue / this.rightValue
+                ? this.result = leftNumericValue / rightNumericValue
                 : this.resetMemory();
                 break;
             
