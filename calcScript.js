@@ -292,7 +292,7 @@ class Calculator {
     }
 
     get rightValue() {
-        return parseFloat(this.#rightValue);
+        return this.#rightValue;
     }
 
     set rightValue(value) {
@@ -301,9 +301,25 @@ class Calculator {
             return;
         }
 
+        if (this.#valueIsDecimal(value)) {
+            switch(this.rightDecimalActive) {
+                case true:
+                    return;
+                case false:
+                    this.rightDecimalActive = true;
+                    break;
+            }
+        }
+
         switch(this.state) {
-            case Calculator.STATE.OPERAND: 
-                this.#rightValue = value;
+            case Calculator.STATE.OPERAND:
+                if (this.#valueIsDecimal(value)) {
+                    this.#rightValue = `0${value}`;
+                } 
+                
+                else {
+                    this.#rightValue = value;
+                }
                 break;
 
             case Calculator.STATE.RIGHT:
