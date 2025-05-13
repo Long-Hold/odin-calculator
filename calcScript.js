@@ -476,7 +476,6 @@ class CalculatorGUI {
         const buttonType = event.target.parentNode.id;
         const textContent = event.target.textContent;
 
-        // TODO: Handle different classes of events (numeric, operand, clear buttons)
         switch (buttonType) {
             case 'reset-buttons':
                 this.#handleResetButtons(event);
