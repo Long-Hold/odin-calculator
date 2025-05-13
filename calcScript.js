@@ -152,6 +152,7 @@ class Calculator {
     #leftDecimalActive;
     #leftValue;
     #operand;
+    #rightDecimalActive;
     #rightValue;
     #state;
     #result;
@@ -164,6 +165,7 @@ class Calculator {
         this.#leftDecimalActive = false;
         this.#leftValue = null;
         this.#operand = null;
+        this.#rightDecimalActive = false;
         this.#rightValue = null;
         this.#state = Calculator.STATE.INITIAL;
         this.#result = null;
@@ -190,7 +192,7 @@ class Calculator {
 
     set leftDecimalActive(value) {
         if (typeof(value) !== 'boolean') {
-            this.#logSetterErrors(value, 'decimalActive');
+            this.#logSetterErrors(value, 'leftDecimalActive');
             return;
         }
 
@@ -262,6 +264,26 @@ class Calculator {
         catch(err) {
             this.#logSetterErrors(operandNodeID, '#operand');
             this.#setToBaseState();
+        }
+    }
+
+    get rightDecimalActive() {
+        return this.#rightDecimalActive;
+    }
+
+    set rightDecimalActive(value) {
+        if (typeof(value) !== 'boolean') {
+            this.#logSetterErrors(value, 'rightDecimalActive');
+            return;
+        }
+
+        // Prevent invalid boolean assignment if the leftValue does have a decimal
+        if (this.#rightValue.inlcudes('.')){
+            this.#rightDecimalActive = true;
+        }
+
+        else {
+            this.#rightDecimalActive = value;
         }
     }
 
