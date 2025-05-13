@@ -380,6 +380,17 @@ class CalculatorGUI {
         [Calculator.OPERATIONS.DIVIDE]: '÷'
     };
 
+    static KEYBOARD_OPERAND_CONVERSION = {
+        /**Converts keyboard operand symbols to a string representation.
+         * Allows targeting of DOM elements that share an ID of the same string.
+         */
+        '*': 'multiply',
+        '/': 'divide',
+        '+': 'add',
+        '-': 'subtract',
+        '=': 'equal'
+    }
+
     #display;
     #buttonContainer;
     #placeHolder;
@@ -489,7 +500,7 @@ class CalculatorGUI {
          * 
          * Invalid keyboard events are ignored.
          */
-
+        console.log(event.key);
 
     }
 
