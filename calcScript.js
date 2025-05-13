@@ -624,8 +624,17 @@ class CalculatorGUI {
         ) {
             // Evaluate the expression, which stores it in the result variable
             this.#calcEngine.calculate();
-            this.#calcEngine.state = Calculator.INPUT_TYPE.OPERAND;
 
+            // If the resulting value is a whole number, we turn off the leftDecimal flag
+            // This is because this particular if statement handles expression chaining,
+            // and result will be stored in leftValue
+            if (Number.isInteger(this.#calcEngine.result)) {
+                this.#calcEngine.leftDecimalActive = false;
+            }
+            
+            this.#calcEngine.rightDecimalActive = false;
+
+            this.#calcEngine.state = Calculator.INPUT_TYPE.OPERAND;
             this.#submitNumericInput(this.#calcEngine.result);
             this.#displayNumericInput();
         }
