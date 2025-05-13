@@ -197,7 +197,7 @@ class Calculator {
         }
 
         // Prevent invalid boolean assignment if the leftValue does have a decimal
-        if (this.#leftValue.inlcudes('.')){
+        if (this.#leftValue.includes('.')){
             this.#leftDecimalActive = true;
         }
 
@@ -278,7 +278,7 @@ class Calculator {
         }
 
         // Prevent invalid boolean assignment if the leftValue does have a decimal
-        if (this.#rightValue.inlcudes('.')){
+        if (this.#rightValue.includes('.')){
             this.#rightDecimalActive = true;
         }
 
@@ -316,7 +316,7 @@ class Calculator {
                 if (this.#valueIsDecimal(value)) {
                     this.#rightValue = `0${value}`;
                 } 
-                
+
                 else {
                     this.#rightValue = value;
                 }
