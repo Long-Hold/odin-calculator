@@ -47,6 +47,7 @@ header {
 }
 
 #display-window {
+    flex: 1;
     width: 90%;
     height: 20%;
     text-align: end;
@@ -57,6 +58,8 @@ header {
     border-radius: 10px;
     box-shadow: inset 2px 2px 5px black;
     color: teal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Button styling */
