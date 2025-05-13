@@ -271,7 +271,6 @@ class Calculator {
         }
 
         this.#rightDecimalActive = value;
-        }
     }
 
     #getNumericRightValue() {
