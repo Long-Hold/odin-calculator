@@ -365,6 +365,8 @@ class Calculator {
  * Backspace is converted to 'clear-digit'.
  * 
  * Escape is converted to 'clear-memory'.
+ * 
+ * 'Enter' is converted to 'equal'.
  */
 
 class CalculatorGUI {
