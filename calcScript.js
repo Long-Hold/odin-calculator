@@ -380,6 +380,9 @@ class CalculatorGUI {
         [Calculator.OPERATIONS.DIVIDE]: '÷'
     };
 
+    // Regex pattern to check for integer input
+    static SINGLE_DIGIT_PATTERN = /^\d$/;
+
     static KEYBOARD_OPERAND_CONVERSION = {
         /**Converts keyboard operand symbols to a string representation.
          * Allows targeting of DOM elements that share an ID of the same string.
