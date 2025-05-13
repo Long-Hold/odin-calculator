@@ -353,22 +353,6 @@ class Calculator {
     }
 }
 
-/**To simulate a click, we need to map the keyboard event values
- * to the respective DOM elements.
- * 
- * Numerical input can be directly compared to the ID of digit buttons.
- * 
- * Operation symbols need to be converted to a string representation of the operands name.
- * 
- * Decimal input needs to be converted to a string representation 'decimal'.
- * 
- * Backspace is converted to 'clear-digit'.
- * 
- * Escape is converted to 'clear-memory'.
- * 
- * 'Enter' is converted to 'equal'.
- */
-
 class CalculatorGUI {
     static OPERAND_SYMBOLS = {
         /**Converts Calculator Class SYMBOLS to 
