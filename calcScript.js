@@ -149,6 +149,14 @@ class Calculator {
         }
     }
 
+    static formatFloat(number) {
+        // Only allows up to 4 decimal places for floats
+        return new Intl.NumberFormat( 'en-US', {
+            style:'decimal', 
+            maximumFractionDigits: 4
+        }).format(number,);
+    }
+
     #leftDecimalActive;
     #leftValue;
     #operand;
@@ -331,7 +339,7 @@ class Calculator {
     }
 
     set result(value) {
-        this.#result = value;
+        this.#result = Calculator.formatFloat(value);
     }
 
     calculate() {
@@ -631,7 +639,7 @@ class CalculatorGUI {
             if (Number.isInteger(this.#calcEngine.result)) {
                 this.#calcEngine.leftDecimalActive = false;
             }
-            
+
             this.#calcEngine.rightDecimalActive = false;
 
             this.#calcEngine.state = Calculator.INPUT_TYPE.OPERAND;
