@@ -639,18 +639,6 @@ class CalculatorGUI {
         : `${this.#calcEngine.leftValue} `
     }
 
-    #isInt(number) {
-        return number % 1 === 0;
-    }
-
-    #formatFloat(number) {
-        // Only allows up to 4 decimal places for floats
-        return new Intl.NumberFormat( 'en-US', {
-            style:'decimal', 
-            maximumFractionDigits: 4
-        }).format(number,);
-    }
-
     #displayCalculation() {
         // Call the engines calculate method, then retrieve the result for display
         this.#calcEngine.calculate();
