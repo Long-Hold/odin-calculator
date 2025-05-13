@@ -468,7 +468,11 @@ class CalculatorGUI {
     }
 
     #processKeyboardEvent(event) {
-        
+        /**Processes keyboard events by simulating clicks
+         * on specific dom elements based on which event is received.
+         * 
+         * Invalid keyboard events are ignored.
+         */
     }
 
     #handleResetButtons(event) {
