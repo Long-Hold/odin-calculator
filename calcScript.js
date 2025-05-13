@@ -196,14 +196,7 @@ class Calculator {
             return;
         }
 
-        // Prevent invalid boolean assignment if the leftValue does have a decimal
-        if (this.#leftValue.includes('.')){
-            this.#leftDecimalActive = true;
-        }
-
-        else {
-            this.#leftDecimalActive = value;
-        }
+        this.#leftDecimalActive = value;
     }
 
     #getNumericLeftValue() {
@@ -277,13 +270,7 @@ class Calculator {
             return;
         }
 
-        // Prevent invalid boolean assignment if the leftValue does have a decimal
-        if (this.#rightValue.includes('.')){
-            this.#rightDecimalActive = true;
-        }
-
-        else {
-            this.#rightDecimalActive = value;
+        this.#rightDecimalActive = value;
         }
     }
 
