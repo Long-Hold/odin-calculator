@@ -388,7 +388,7 @@ class CalculatorGUI {
         '/': 'divide',
         '+': 'add',
         '-': 'subtract',
-        '=': 'equal'
+        '=': 'equal',
     }
 
     static KEYBOARD_UTIL_KEY_CONVERSION = {
@@ -397,7 +397,8 @@ class CalculatorGUI {
          */
         'Enter': 'equal',
         'Backspace': 'clear-digit',
-        'Escape': 'clear-memory'
+        'Escape': 'clear-memory',
+        '.': 'decimal',
     }
 
     #display;
