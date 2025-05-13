@@ -391,6 +391,15 @@ class CalculatorGUI {
         '=': 'equal'
     }
 
+    static KEYBOARD_UTIL_KEY_CONVERSION = {
+        /**Pairs utility keys with a string that allows
+         * comparison with certain nodes in the DOM that share the same ID string.
+         */
+        'Enter': 'equal',
+        'Backspace': 'clear-digit',
+        'Escape': 'clear-memory'
+    }
+
     #display;
     #buttonContainer;
     #placeHolder;
