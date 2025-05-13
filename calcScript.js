@@ -513,10 +513,9 @@ class CalculatorGUI {
          * 
          * Invalid keyboard events are ignored.
          */
-        console.log(event.key);
 
         const key = event.key;
-        if (Number(key)) {
+        if (CalculatorGUI.SINGLE_DIGIT_PATTERN.test(key)) {
             document.getElementById(key).click();
         }
 
@@ -528,6 +527,10 @@ class CalculatorGUI {
         else if (key in CalculatorGUI.KEYBOARD_UTIL_KEY_CONVERSION) {
             const utilKey = CalculatorGUI.KEYBOARD_UTIL_KEY_CONVERSION[key];
             document.getElementById(utilKey).click();
+        }
+
+        else {
+            console.log(`Keyboard Key: ${key} ignored.`);
         }
     }
 
