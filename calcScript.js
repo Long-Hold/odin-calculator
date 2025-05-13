@@ -373,6 +373,7 @@ class CalculatorGUI {
         this.#calcEngine = new Calculator();
         this.#setDOMNodeRefs();
         this.#setEventListeners();
+        this.#setKeyboardEventListener();
         this.#cachePlaceHolder();
     }
 
@@ -387,6 +388,10 @@ class CalculatorGUI {
 
     #setEventListeners() {
         this.#buttonContainer.addEventListener('click', this.#delegateEvent.bind(this));
+    }
+
+    #setKeyboardEventListener() {
+        document.addEventListener('keydown', this.#processKeyboardEvent.bind(this));
     }
 
     #cachePlaceHolder() {
@@ -460,6 +465,10 @@ class CalculatorGUI {
                 this.#processOperandInput(event);
                 return;
         }
+    }
+
+    #processKeyboardEvent(event) {
+        
     }
 
     #handleResetButtons(event) {
